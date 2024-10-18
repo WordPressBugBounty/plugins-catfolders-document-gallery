@@ -3,7 +3,7 @@ Contributors: catfolders
 Donate link: https://wpmediafolders.com/ 
 Tags: documents, pdf, file gallery, document library, document management
 Requires at least: 6.1
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.2
 Stable tag: 1.5.2
 License: GPL-3.0
@@ -19,7 +19,7 @@ It will save you a huge amount of time thanks to these built-in features:
 
 - 2 customizable layouts: list & grid
 - 5+ columns and details: title, file type, icon, file size, updated date, and download link
-- NEW: Automatically displaying PDF first page thumbnails
+- NEW: Automatically displaying **PDF first page thumbnails**
 - Supports all WordPress media file types
 - Mobile responsive
 - Modern gallery design 
@@ -27,7 +27,7 @@ It will save you a huge amount of time thanks to these built-in features:
 - File title search box
 - Sort by size, title, filetype, and modified date 
 - Flexible pagination
-- Click to preview file, open in popup modal, or download file
+- Click to preview the file, open it in a popup modal, or download the file
 
 ###🎯 FEATURES
 
