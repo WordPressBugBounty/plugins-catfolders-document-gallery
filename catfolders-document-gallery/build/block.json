@@ -11,6 +11,22 @@
     "html": false
   },
   "attributes": {
+    "libraryType": {
+      "type": "string",
+      "default": "single_folder"
+    },
+    "showBreadCrumb": {
+      "type": "boolean",
+      "default": false
+    },
+    "isNestedFolders": {
+      "type": "boolean",
+      "default": false
+    },
+    "searchScope": {
+      "type": "string",
+      "default": "narrow"
+    },
     "folders": {
       "type": "array",
       "default": []

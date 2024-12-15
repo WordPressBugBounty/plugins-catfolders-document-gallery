@@ -937,3 +937,175 @@
 #cf-app table.cf-table-grid .cf-column-last.no-margin-top {
   margin-top: 5px;
 }
+
+/* Loading effect */
+.cf-table-my-wrap {
+  position: relative; /* Ensures the pseudo-element is positioned relative to the container */
+}
+
+.cf-table-my-wrap.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  margin-top: -20px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: cfdocspin 1s linear infinite;
+  z-index: 999;
+}
+@keyframes cfdocspin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+
+/* Breadcrumb */
+.cfdoc_breadcrumb {
+  font-size: 16px;
+  position: relative;
+  display: flex;
+  background-color: #edeff0;
+  padding: 0 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.cfdoc_breadcrumb ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cfdoc_breadcrumb > ul {
+  display: flex;
+  gap: 0;
+  padding: 10px;
+  /* background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.cfdoc_breadcrumb ul.children {
+  display: none;
+  min-width: 150px;
+  position: absolute;
+  z-index: 10;
+  padding: 5px 15px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  top: 100%;
+  left: auto;
+}
+.cfdoc_breadcrumb ul.children ul.children {
+  top: 0;
+  left: 100%;
+}
+.cfdoc_breadcrumb li {
+  position: relative;
+  padding: 5px 0 5px 0px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+.cfdoc_breadcrumb > ul > li {
+  position: relative;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  display: flex;
+  color: #2c3f4c;
+  margin-right: 8px;
+  font-size: 16px;
+  
+}
+.cfdoc_breadcrumb li li {
+  display: flex;
+  width: 100%;
+}
+.cfdoc_breadcrumb li li.has-childrend {
+  background: url(../images/icons/right-arrow.svg) no-repeat;
+  background-position: right;
+}
+.cfdoc_breadcrumb > ul > li > span {
+  margin: 0 5px;
+}
+.cfdoc_breadcrumb > ul > li i {
+  display: flex;
+  width: 20px;
+}
+/* .cfdoc_breadcrumb > ul > li.cfdoc-home-item:before {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  content: "";
+  background-image: url('data:image/svg+xml,<svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"></path></svg>');
+  width: 20px;
+  height: 20px;
+} */
+
+.cfdoc_breadcrumb > ul > li:not(:last-child)::after{
+  /* content: '\00bb'; */
+  content: '/';
+  margin-left: 10px;
+  color: #959fa5;
+  /* font-size: 17px; */
+}
+
+/* .cfdoc_breadcrumb > ul > li:hover {
+  background-color: #e9ecef;
+} */
+
+/* Show children when hovering on the parent <li> */
+.cfdoc_breadcrumb li:hover > ul.children {
+  display: block;
+}
+
+/* Style the children items */
+.cfdoc_children ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.cfdoc_children ul li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  color: #333;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.cfdoc_children ul li i {
+  display: flex;
+  align-items: center;
+  color: #666;
+  font-size: 20px;
+  width: 20px;
+}
+
+.cfdoc_children ul li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}

@@ -4,7 +4,7 @@
  * Description:       Display WordPress PDF gallery from folder. This WordPress document gallery is 100% free, supports unlimited file types, and works great with CatFolders - WP Media Folders.
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           1.5.2
+ * Version:           2.0.0
  * Author:            CatFolders
  * Author URI:        https://wpmediafolders.com/
  * Text Domain:       catfolders-document-gallery
@@ -58,7 +58,7 @@ if ( ! defined( 'CATF_DG_IMAGES' ) ) {
 }
 
 if ( ! defined( 'CATF_DG_VERSION' ) ) {
-	define( 'CATF_DG_VERSION', '1.5.2' );
+	define( 'CATF_DG_VERSION', '2.0.0' );
 }
 
 spl_autoload_register(

@@ -10,6 +10,11 @@ class Helper {
 
 	protected function __construct() {}
 
+	public static function get_folder_detail( $folder_id, $select = '*' ) {
+		global $wpdb;
+		$folders = $wpdb->get_results("SELECT $select FROM " . $wpdb->prefix . "catfolders WHERE `id` = " . intval( $folder_id ));
+		return $folders ? $folders[0] : null;
+	}
 	public static function get_available_type( $file_type ) {
 		$file_type = strtolower( $file_type );
 
@@ -171,7 +176,7 @@ class Helper {
 		$columns = array_filter(
 			$columns,
 			function( $column ) use ( $displayColumns ) {
-				return $displayColumns[ $column['key'] ];
+				return $displayColumns[ $column['key'] ] === true || $displayColumns[ $column['key'] ] === 'true';
 			}
 		);
 
@@ -362,5 +367,29 @@ class Helper {
 			'catf_dg',
 			$args
 		);
+	}
+	public static function render_table_html($attributes) {
+		$columns = self::generate_columns( $attributes['displayColumns'] );
+		$data = self::get_attachments( $attributes );
+		ob_start();
+		?>
+		<table class="cf-table" style="--grid-column:<?php echo esc_attr( $attributes['gridColumn'] ); ?>">
+				<thead>
+					<tr>
+						<?php foreach ( $columns as $column ) { ?>
+							<th class="<?php if ("Title" === $column['label']) echo esc_attr('cf-title-th') ?>">
+								<span><?php echo esc_html( $column['label'] ); ?></span>
+							</th>	
+						<?php } ?>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ( $data['files'] as $file ) { ?>
+						<tr><?php self::render_row( $columns, $file, $attributes ); ?></tr>
+					<?php } ?> 
+				</tbody>
+			</table>
+		<?php
+		return ob_get_clean();
 	}
 }

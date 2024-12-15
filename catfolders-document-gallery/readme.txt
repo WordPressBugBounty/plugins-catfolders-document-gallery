@@ -1,25 +1,34 @@
-=== CatFolders Document Gallery - Display WordPress PDF Gallery from Category Folder & More ===
+=== Document Gallery - Display PDF Gallery from Many Folders ===
 Contributors: catfolders
 Donate link: https://wpmediafolders.com/ 
 Tags: documents, pdf, file gallery, document library, document management
 Requires at least: 6.1
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.2
-Stable tag: 1.5.2
+Stable tag: 2.0.0
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl.html
 
-Display WordPress PDF gallery and file gallery from folder. Comes with clean, searchable & sortable list/grid layout.
+Display WordPress PDF gallery and file gallery from folder. Comes with a clean, searchable & sortable list/grid layout.
 
 == Description ==
 
-**Document Gallery from Folders** works with Gutenberg and CatFolders - WP Media Folders plugin to publish WordPress pdf gallery quickly.
+**Document Gallery** works with the CatFolders plugin to offer a more organized and user-friendly document gallery on your WordPress site!
+
+💥NEW! **[Multiple Levels of Folders](https://wpmediafolders.com/docs/addons/document-gallery/multiple-levels-of-folders/)** with Breadcrumb Navigation and Nested Folders
+
+CatFolders Document Gallery just got even better! Our latest feature now supports multiple levels of folders in a clear folder structure. It allows your customers to browser your documents more efficiently than ever before.
+
+**Key benefits:**
+
+- **Multi-level Folder Structure**: Create and manage complex folder hierarchies for better organization.
+- **Breadcrumb Navigation**: Quickly understand and navigate your folder paths with easy-to-follow breadcrumbs.
 
 It will save you a huge amount of time thanks to these built-in features:
 
 - 2 customizable layouts: list & grid
 - 5+ columns and details: title, file type, icon, file size, updated date, and download link
-- NEW: Automatically displaying **PDF first page thumbnails**
+- Automatically displaying **[PDF first page thumbnails](https://wpmediafolders.com/docs/addons/document-gallery/thumbnails/)**
 - Supports all WordPress media file types
 - Mobile responsive
 - Modern gallery design 
@@ -114,6 +123,11 @@ So you want us to add further integrations such as **Elementor pdf gallery**, an
 7. Tabbed filterable gallery with PDF first page thumbnails.
 
 == Changelog ==
+
+= Dec 15, 2024 - Version 2.0.0 =
+- New feature: Multiple levels of folders with breadcrumb and nested folders
+- Fixed: The issue where the counter feature did not work when switching subfolders
+- Fixed: Search function
 
 = Jul 5, 2024 - Version 1.5.2 =
 - Added: Counter for the number of clicks to view/download file
