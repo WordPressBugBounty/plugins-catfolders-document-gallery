@@ -55,6 +55,8 @@ class Shortcode {
 			),
 		];
 
+		wp_set_script_translations( "catf-dg-frontend", 'catfolders-document-gallery', CATF_DG_DIR . '/languages/' );
+
 		Helper::register_localize_script($args);
 	}
 }

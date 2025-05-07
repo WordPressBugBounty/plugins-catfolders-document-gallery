@@ -12,8 +12,12 @@ class Blocks {
 
 	protected function __construct() {
 		add_action( 'init', array( $this, 'register_block_type' ) );
+		add_action( 'wp_head', array( $this, 'wp_head' ) );
 	}
-
+	public function wp_head() {
+		echo '<link rel="preload" href="'.CATF_DG_URL . 'assets/css/styles.min.css" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
+		echo '<noscript><link rel="stylesheet" href="' . CATF_DG_URL . 'assets/css/styles.min.css"></noscript>';
+	}
 	public function register_block_type() {
 		wp_register_style(
 			'catf-dg-datatables',

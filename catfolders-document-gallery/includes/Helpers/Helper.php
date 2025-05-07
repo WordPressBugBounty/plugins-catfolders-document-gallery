@@ -373,7 +373,7 @@ class Helper {
 		$data = self::get_attachments( $attributes );
 		ob_start();
 		?>
-		<table class="cf-table" style="--grid-column:<?php echo esc_attr( $attributes['gridColumn'] ); ?>">
+		<table class="cf-table <?php echo ( count( $data['files'] ) == 0 ) ? 'cf-empty-data' : ''; ?>" style="--grid-column:<?php echo esc_attr( $attributes['gridColumn'] ); ?>">
 				<thead>
 					<tr>
 						<?php foreach ( $columns as $column ) { ?>

@@ -3,9 +3,9 @@ Contributors: catfolders
 Donate link: https://wpmediafolders.com/ 
 Tags: documents, pdf, file gallery, document library, document management
 Requires at least: 6.1
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -13,30 +13,34 @@ Display WordPress PDF gallery and file gallery from folder. Comes with a clean, 
 
 == Description ==
 
-**Document Gallery** works with the CatFolders plugin to offer a more organized and user-friendly document gallery on your WordPress site!
+**Document Gallery** is a 100% free addon for **CatFolders, a WordPress media folder plugin**. It allows users to create and display file galleries (especially for documents like PDFs, Word, Excel files, ebooks, etc.) directly on posts or pages using the block editor or a shortcode.
 
-💥NEW! **[Multiple Levels of Folders](https://wpmediafolders.com/docs/addons/document-gallery/multiple-levels-of-folders/)** with Breadcrumb Navigation and Nested Folders
+With **Document Gallery**, you can:
 
-CatFolders Document Gallery just got even better! Our latest feature now supports multiple levels of folders in a clear folder structure. It allows your customers to browser your documents more efficiently than ever before.
+- Display a folder’s documents in a neat grid or list view.
+- Enable front-end file previews and downloads.
+- Customize how file titles, icons, and other metadata appear.
+- Filter files by folder, type, date, or topic.
 
-**Key benefits:**
+💥 **New Feature: Nested Folders with Breadcrumb Navigation!**
 
-- **Multi-level Folder Structure**: Create and manage complex folder hierarchies for better organization.
-- **Breadcrumb Navigation**: Quickly understand and navigate your folder paths with easy-to-follow breadcrumbs.
+The CatFolders Document Gallery now supports **multi-level folder structure**, making it easier than ever to organize and present your documents. With intuitive breadcrumb navigation, your website visitors can quickly explore subfolders and find exactly what they need!
+
+📌 [Documentation](https://wpmediafolders.com/docs/addons/document-gallery/) | [Quick Demo](https://wpmediafolders.com/catfolders-document-gallery-demo/)
 
 It will save you a huge amount of time thanks to these built-in features:
 
-- 2 customizable layouts: list & grid
-- 5+ columns and details: title, file type, icon, file size, updated date, and download link
-- Automatically displaying **[PDF first page thumbnails](https://wpmediafolders.com/docs/addons/document-gallery/thumbnails/)**
-- Supports all WordPress media file types
-- Mobile responsive
-- Modern gallery design 
-- Show/hide columns
-- File title search box
-- Sort by size, title, filetype, and modified date 
-- Flexible pagination
-- Click to preview the file, open it in a popup modal, or download the file
+- Two customizable layouts: **list** and **grid**
+- Over 5 file details available:: title, file type, icon, file size, updated date, and download link
+- Automatically shows **[PDF first-page thumbnails](https://wpmediafolders.com/docs/addons/document-gallery/thumbnails/)**
+- Supports all standard WordPress media file types
+- Fully mobile responsive
+- Clean, modern gallery design
+- Option to show or hide specific columns
+- Built-in file title search box
+- Sort files by size, title, file type, or last modified date
+- Flexible pagination settings
+- Click to preview, open in a popup, or download any file
 
 ###🎯 FEATURES
 
@@ -52,22 +56,31 @@ It will save you a huge amount of time thanks to these built-in features:
 
 To get started with this WordPress PDF gallery plugin, simply follow these steps:
 
-1. Install [CatFolders - WP Media Folders](https://wordpress.org/plugins/catfolders/)  
+1. Install CatFolders - [WP Media Folders free](https://wordpress.org/plugins/catfolders/), or [CatFolders pro version](https://wpmediafolders.com/)
 2. Install CatFolders Document Gallery (this plugin)
 3. Start organizing documents into folders
 4. Pick a folder to create WordPress gallery from folder
-5. Customize the gallery appearance and publish
+5. Customize the gallery appearances and publish
 
 [youtube https://youtu.be/gLxi4CTItKE]
 
 ###💪 WHY YOU SHOULD USE DOCUMENT GALLERY BY CATFOLDERS?
 
-Publishing **WordPress document gallery from folder to the front end** will keep your visitors engaged and boost the conversion rate. These are your front-end benefits:
+It’s especially useful for WordPress websites that offer downloadable resources, such as:
 
-* Dynamic document management: Once you update the category folder in WordPress media library, it will also reflect on the WordPress page/post.
-* Searchable & sortable: Your audience can search by title; and sort the document list by date, file size, file name, and much more.
-* Fast performance: Easily change the number of documents per page without having to reload the page.
-* Fully responsive: This datatable list/grid works well on any screen size and mobile device.
+- eCommerce websites offering **digital products** or **file downloads**.
+- Membership sites providing gated access to **exclusive files**.
+- Schools or universities sharing **study materials**.
+- Companies providing **white papers** or **reports**.
+- Nonprofits sharing **brochures** and **legal docs**.
+
+Let's bring your file collections to life on the front end—keep users engaged and guide them toward action. 
+Here’s what you get:
+
+- **Live content syncing**: Any changes made to your media folders are instantly reflected wherever they’re displayed—no need to edit pages manually.
+- **Easy to explore**: Visitors can quickly locate files with a built-in search bar and organize the view by date, name, size, popularity, and more.
+- **Smooth browsing experience**: Load more items dynamically without refreshing the page, keeping navigation seamless.
+- **Optimized for all devices**: Whether on desktop, tablet, or smartphone, your content adapts beautifully to every screen.
 
 As an admin, you will get these advantages of the customization options: 
 
@@ -123,6 +136,9 @@ So you want us to add further integrations such as **Elementor pdf gallery**, an
 7. Tabbed filterable gallery with PDF first page thumbnails.
 
 == Changelog ==
+
+= May 7, 2025 - Version 2.0.1 =
+- Improved: Translation text in gallery shortcode
 
 = Dec 15, 2024 - Version 2.0.0 =
 - New feature: Multiple levels of folders with breadcrumb and nested folders

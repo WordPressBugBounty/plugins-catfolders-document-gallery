@@ -137,6 +137,9 @@ class Thumbnail {
 			return $thumbnail;
 		}
 
+		if( ! extension_loaded( 'imagick' ) ) {
+			return $thumbnail;
+		}
 		try {
 			$attachment_path = get_attached_file( $attachment_id );
 			$attachment_name = sanitize_file_name( basename( $attachment_path ) );
@@ -248,20 +251,21 @@ class Thumbnail {
 
 	private static function retrieve_thumbnail_orientation( $attachment_id ) {
 		$attachment_image_src = wp_get_attachment_image_src( $attachment_id );
-		$thumbnail_width      = $attachment_image_src['1'];
-		$thumbnail_height     = $attachment_image_src['2'];
+		if( is_array( $attachment_image_src ) ) {
+			$thumbnail_width      = $attachment_image_src['1'];
+			$thumbnail_height     = $attachment_image_src['2'];
 
-		$generated_thumbnail = get_post_meta( $attachment_id, 'cf_generated_thumbnail', true );
+			$generated_thumbnail = get_post_meta( $attachment_id, 'cf_generated_thumbnail', true );
 
-		if ( $generated_thumbnail ) {
-			$thumbnail_width  = $generated_thumbnail['image_size']['width'];
-			$thumbnail_height = $generated_thumbnail['image_size']['height'];
+			if ( $generated_thumbnail ) {
+				$thumbnail_width  = $generated_thumbnail['image_size']['width'];
+				$thumbnail_height = $generated_thumbnail['image_size']['height'];
+			}
+
+			if ( $thumbnail_width > $thumbnail_height ) {
+				return 'cf-landscape';
+			}
 		}
-
-		if ( $thumbnail_width > $thumbnail_height ) {
-			return 'cf-landscape';
-		}
-
 		return 'cf-portrait';
 	}
 
