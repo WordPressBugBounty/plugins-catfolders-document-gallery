@@ -26,7 +26,6 @@ class Shortcode {
 		);
 
 		$attributes = Helper::get_shortcode_data( $args );
-
 		$this->enqueue_scripts();
 
 		ob_start();

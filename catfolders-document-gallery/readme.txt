@@ -5,7 +5,7 @@ Tags: documents, pdf, file gallery, document library, document management
 Requires at least: 6.1
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -136,6 +136,9 @@ So you want us to add further integrations such as **Elementor pdf gallery**, an
 7. Tabbed filterable gallery with PDF first page thumbnails.
 
 == Changelog ==
+
+= Aug 27, 2025 - Version 2.0.2 =
+- Added: Search Scope (Narrow, All)
 
 = May 7, 2025 - Version 2.0.1 =
 - Improved: Translation text in gallery shortcode

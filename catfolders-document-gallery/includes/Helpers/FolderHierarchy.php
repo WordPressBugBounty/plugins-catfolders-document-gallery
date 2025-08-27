@@ -33,13 +33,15 @@ class FolderHierarchy {
             $html .= '<ul>';
         
             $folder = Helper::get_folder_detail( $folder_id );
-            $html .= '<li data-id="'.intval( $folder_id ).'" class="cfdoc-home-item '. (!empty($children) ? 'has-children' : '') .'">' . $this->homeIcon() . '<span>'.esc_html($folder->title).'</span>';
-            $children = $this->get_children($folder_id);
-            if(!empty($children)) {
-                $html .= $this->downArrowIcon();
-                $html .= $children;
+            if( is_object( $folder ) ) {
+                $html .= '<li data-id="'.intval( $folder_id ).'" class="cfdoc-home-item '. (!empty($children) ? 'has-children' : '') .'">' . $this->homeIcon() . '<span>'.esc_html($folder->title).'</span>';
+                $children = $this->get_children($folder_id);
+                if(!empty($children)) {
+                    $html .= $this->downArrowIcon();
+                    $html .= $children;
+                }
+                $html .= '</li>';
             }
-            $html .= '</li>';
             $html .= '</ul>';
         }
 

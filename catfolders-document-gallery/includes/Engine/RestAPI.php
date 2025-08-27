@@ -76,6 +76,17 @@ class RestAPI {
 				),
 			)
 		);
+		register_rest_route(
+			CATF_ROUTE_NAMESPACE,
+			'/catfdoc-search-data',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::EDITABLE,
+					'callback'            => array( $this, 'search_data' ),
+					'permission_callback' => '__return_true',
+				),
+			)
+		);
 	}
 
 	public function resPermissionsCheck() {
@@ -106,8 +117,8 @@ class RestAPI {
 		$params = $request->get_params();
 		$data   = Helper::get_attachments( $params );
 		//this function is used at admin to preview
-		$data['breadcrumbHtml'] = $cfdoc_folder_hierarchy->render_hierarchy($params['folders'][0]);
-		$data['childrenHtml'] = $cfdoc_folder_hierarchy->get_lv1_children($params['folders'][0]);
+		$data['breadcrumbHtml'] = $cfdoc_folder_hierarchy->render_hierarchy($params['folders'][0] ?? 0);
+		$data['childrenHtml'] = $cfdoc_folder_hierarchy->get_lv1_children($params['folders'][0] ?? 0);
 		return new \WP_REST_Response( $data );
 	}
 
@@ -159,6 +170,67 @@ class RestAPI {
 				}
 				
 			}
+
+		} catch ( \Exception $exc ) {
+			$data = $exc->getMessage();
+		}
+		return new \WP_REST_Response( $data );
+	}
+	public function search_data( \WP_REST_Request $request ) {
+		try {
+			$params = $request->get_params();
+			$searchValue = $params['searchValue'] ?? '';
+			$catfDataJson = $params['catfDataJson'] ?? array();
+
+			//update folders to catfDataJson
+			$catfDataJson['folders'] = $params['currentFolders'] ?? array();
+			$folders = $catfDataJson['folders'] ?? array();
+			$displayColumns = $catfDataJson['displayColumns'] ?? array();
+			if( empty($folders) || empty($displayColumns) ) {
+				return new \WP_REST_Response( array() );
+			}
+
+			$catfDataJson['searchValue'] = $searchValue;
+			$data = Helper::get_attachments( $catfDataJson, !empty($searchValue) );
+			$files = $data['files'] ?? array();
+
+			$attributes = $catfDataJson;
+			$columns = Helper::generate_columns( $attributes['displayColumns'] );
+
+			$formattedFiles = array();
+			foreach ($files as $file) {
+				$file = wp_parse_args( $file, array(
+					'image' => '',
+					'title' => '',
+					'type' => '',
+					'size' => '',
+					'modified' => '',
+					'counter' => '',
+					'link' => ''
+				) );
+
+				//render column content
+				foreach($columns as $column) {
+					$columnKey = $column['key'];
+					if( isset($file[$columnKey]) && ! empty( $file[$columnKey] ) ) {
+						$file[$columnKey] = Helper::render_column_content($file, $column, $attributes);
+					}
+				}
+				
+				$formattedFile = array();
+				$index = 0;
+				foreach($columns as $column) {
+					$columnKey = $column['key'];
+					$formattedFile[$index] = $file[$columnKey];
+					$index++;
+				}
+
+				$formattedFiles[] = $formattedFile;
+			}
+
+			$data = array();
+			$data['rows'] = $formattedFiles;
+			$data['total'] = count($formattedFiles);
 
 		} catch ( \Exception $exc ) {
 			$data = $exc->getMessage();
