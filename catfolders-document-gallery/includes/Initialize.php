@@ -9,6 +9,7 @@ class Initialize {
 	use SingletonTrait;
 
 	protected function __construct() {
+		\CatFolder_Document_Gallery\Engine\AssetsManager::get_instance();
 		\CatFolder_Document_Gallery\Engine\Blocks\Blocks::get_instance();
 		\CatFolder_Document_Gallery\Engine\RestAPI::get_instance();
 		\CatFolder_Document_Gallery\Engine\PostType::get_instance();

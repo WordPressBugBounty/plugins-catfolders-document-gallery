@@ -119,6 +119,16 @@ class RestAPI {
 		//this function is used at admin to preview
 		$data['breadcrumbHtml'] = $cfdoc_folder_hierarchy->render_hierarchy($params['folders'][0] ?? 0);
 		$data['childrenHtml'] = $cfdoc_folder_hierarchy->get_lv1_children($params['folders'][0] ?? 0);
+
+		$actionIconId = $params['actionIconId'] ?? 0;
+		if($actionIconId > 0) {
+			$actionIconUrl = wp_get_attachment_url($actionIconId);
+			if($actionIconUrl) {
+				$data['actionIconUrl'] = $actionIconUrl;
+			} else {
+				$data['actionIconUrl'] = '';
+			}
+		}
 		return new \WP_REST_Response( $data );
 	}
 

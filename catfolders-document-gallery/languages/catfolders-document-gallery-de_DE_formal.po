@@ -1,62 +1,399 @@
-# Translation of Plugins - CatFolders Document Gallery &#8211; Display WordPress PDF Gallery from Category Folder &amp; More - Development (trunk) in German
-# This file is distributed under the same license as the Plugins - CatFolders Document Gallery &#8211; Display WordPress PDF Gallery from Category Folder &amp; More - Development (trunk) package.
+# Translation of Plugins - Document Gallery &#8211; Display PDF Gallery from Many Folders - Stable (latest release) in German
+# This file is distributed under the same license as the Plugins - Document Gallery &#8211; Display PDF Gallery from Many Folders - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-09-26 10:58:34+0000\n"
+"PO-Revision-Date: 2025-11-12 10:22:01+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/4.0.0-alpha.9\n"
+"X-Generator: GlotPress/4.0.3\n"
 "Language: de\n"
-"Project-Id-Version: Plugins - CatFolders Document Gallery &#8211; Display WordPress PDF Gallery from Category Folder &amp; More - Development (trunk)\n"
+"Project-Id-Version: Plugins - Document Gallery &#8211; Display PDF Gallery from Many Folders - Stable (latest release)\n"
 
-#. Author of the plugin
-msgid "CatFolders"
-msgstr "CatFolders"
-
-#: build/block.json
+#: build/apps/block.json build/block.json
 msgctxt "block description"
 msgid "Display folders item in a document gallery."
 msgstr "Elemente in Ordnern in einer Dokumentengalerie anzeigen."
 
-#: build/block.json
+#: build/apps/block.json build/block.json
 msgctxt "block title"
 msgid "CatFolders Document Gallery"
 msgstr "CatFolders Document Gallery"
 
-#: includes/Helpers/Helper.php:209 build/index.js:1
+#: build/view.js:1
+msgid "total entries"
+msgstr "Einträge insgesamt"
+
+#: build/view.js:1
+msgid "filtered from"
+msgstr "gefiltert von"
+
+#: build/view.js:1
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "Keine Einträge zum Anzeigen vorhanden"
+
+#: build/view.js:1
+msgid "No matching records found"
+msgstr "Keine passenden Einträge gefunden"
+
+#: build/view.js:1
+msgid "Previous Button"
+msgstr "Zurück-Button"
+
+#: build/view.js:1
+msgid "Next Button"
+msgstr "Weiter-Button"
+
+#: build/view.js:1
+msgid "Grid Layout Icon"
+msgstr "Raster-Layout-Symbol"
+
+#: build/view.js:1
+msgid "List Layout Icon"
+msgstr "Listenlayout-Symbol"
+
+#: build/index.js:1
+msgid "General Options"
+msgstr "Allgemeine Optionen"
+
+#: build/index.js:1
+msgid "Folders"
+msgstr "Ordner"
+
+#: build/index.js:1
+msgid "Display Options"
+msgstr "Anzeigeoptionen"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Please select your folders that you want display"
+msgstr "Bitte wählen Sie die Ordner aus, die Sie anzeigen möchten."
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Select folders to show content here"
+msgstr "Ordner auswählen, um Inhalte hier anzuzeigen"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Nested Folders"
+msgstr "Verschachtelte Ordner"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Breadcrumb"
+msgstr "Breadcrumb"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Structure Display"
+msgstr "Struktur-Anzeige"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Search scope"
+msgstr "Suchbereich"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "You can select only one main folder. Its sub-folders will also be included in the folder tree. Your selected main folder will be the root folder."
+msgstr "Sie können nur einen Hauptordner auswählen. Dessen Unterordner werden ebenfalls in die Ordnerstruktur aufgenommen. Der von Ihnen gewählte Hauptordner ist der Stammordner."
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "You can select multiple folders in different levels. All files will be displayed all together in a single list."
+msgstr "Sie können mehrere Ordner verschiedener Ebenen auswählen. Alle Dateien werden zusammen in einer einzigen Liste angezeigt."
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Library Type"
+msgstr "Bibliothekstyp"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "Network response was not ok."
+msgstr "Netzwerkantwort war nicht in Ordnung."
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Display Fields"
+msgstr "Felder anzeigen"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Layout Display"
+msgstr "Layout-Anzeige"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Layout Icon Placement"
+msgstr "Position des Dokumentengalerie-Icons"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Pagination Placement"
+msgstr "Position der Seitennummerierung"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Search Bar Placement"
+msgstr "Position der Suchleiste"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Document Icons"
+msgstr "Dokument-Symbole"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Library Title"
+msgstr "Dokumentengalerie-Titel"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Show"
+msgstr "Anzeigen"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Library Icon"
+msgstr "Dokumentengalerie-Icon"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Sort Type"
+msgstr "Nach Typ sortieren"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Sort By"
+msgstr "Sortieren nach"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Limit items"
+msgstr "Anzahl der Einträge begrenzen"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Popup Height"
+msgstr "Höhe des Pop-ups"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Popup Width"
+msgstr "Breite des Pop-ups"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Link To"
+msgstr "Link zu"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Library Icon Alt Text"
+msgstr "Dokumentengalerie-Icon-Alt-Text"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Library Title Tag"
+msgstr "Dokumentengalerie-Titel-Tag"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Library Title Text"
+msgstr "Dokumentengalerie-Titel-Text"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid ": activate to sort column descending"
+msgstr ": anklicken, um die Spalte absteigend zu sortieren"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid ": activate to sort column ascending"
+msgstr ": anklicken, um die Spalte aufsteigend zu sortieren"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "of"
+msgstr "von"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "Items per page"
+msgstr "Einträge pro Seite"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "Search:"
+msgstr "Suche:"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "Search by title…"
+msgstr "Suche nach Titel..."
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Hide"
+msgstr "Ausblenden"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Both"
+msgstr "Beide"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Bottom"
+msgstr "Unten"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Top"
+msgstr "Oben"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Display as hierarchical folders"
+msgstr "Anzeige als hierarchische Ordner"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Display as a single folder"
+msgstr "Anzeige als einzelner Ordner"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Heading 4"
+msgstr "Überschrift H4"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Heading 3"
+msgstr "Überschrift H3"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Heading 2"
+msgstr "Überschrift H2"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Heading 1"
+msgstr "Überschrift H1"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Paragraph"
+msgstr "Absatz"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "None"
+msgstr "Keine"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Download File"
+msgstr "Datei herunterladen"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Popup Window"
+msgstr "Pop-up-Fenster"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Preview File"
+msgstr "Datei-Vorschau"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "All"
+msgstr "Alle"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Narrow"
+msgstr "Schmal"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Descending"
+msgstr "Absteigend"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Ascending"
+msgstr "Aufsteigend"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Modified"
+msgstr "Geändert"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Grid"
+msgstr "Raster"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "List"
+msgstr "Liste"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Full Size"
+msgstr "Originalgröße"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Large"
+msgstr "Groß"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Medium"
+msgstr "Mittelgroß"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Thumbnail"
+msgstr "Vorschaubild"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Create your first folder"
+msgstr "Erstellen Sie Ihren ersten Ordner"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Oops, you don't have any folder"
+msgstr "Oops, Sie haben noch keinen Ordner."
+
+#: includes/Helpers/Helper.php:387 build/apps/app.js:1 build/index.js:1
 msgid "Download"
 msgstr "Herunterladen"
 
-#: includes/Helpers/Helper.php:152 build/index.js:1
+#: includes/Helpers/Helper.php:249 build/apps/app.js:1 build/index.js:1
 msgid "Link"
 msgstr "Link"
 
-#: includes/Helpers/Helper.php:148 includes/Helpers/Helper.php:209
-#: build/index.js:1
-msgid "Updated"
-msgstr "Geändert"
+#: includes/Helpers/Helper.php:245 build/apps/app.js:1 build/index.js:1
+msgid "Counter"
+msgstr "Zähler"
 
-#: includes/Helpers/Helper.php:144 build/index.js:1
+#: includes/Helpers/Helper.php:241 includes/Helpers/Helper.php:372
+#: build/apps/app.js:1 build/index.js:1
+msgid "Updated"
+msgstr "Hinzugefügt"
+
+#: includes/Helpers/Helper.php:237 build/apps/app.js:1 build/index.js:1
 msgid "Size"
 msgstr "Größe"
 
-#: includes/Helpers/Helper.php:140 build/index.js:1
+#: includes/Helpers/Helper.php:233 build/apps/app.js:1 build/index.js:1
 msgid "Type"
 msgstr "Typ"
 
-#: includes/Helpers/Helper.php:136 build/index.js:1
+#: includes/Helpers/Helper.php:229 build/apps/app.js:1 build/index.js:1
 msgid "Title"
 msgstr "Titel"
 
-#: includes/Fallback.php:12
+#: includes/Helpers/Helper.php:225 build/apps/app.js:1 build/index.js:1
+msgid "Image"
+msgstr "Bild"
+
+#: includes/FallbackMinimumWp.php:16
+msgid "CatFolders Document Gallery requires WordPress 5.9.0 to work and does not support your current WordPress version %1$s."
+msgstr "CatFolders Document Gallery erfordert mindestens die WordPress-Version 5.9.0. Die von Ihnen verwendete WordPress-Version %1$s wird nicht unterstützt."
+
+#: includes/Fallback.php:12 includes/FallbackMinimumWp.php:19
 msgid "Read more details."
-msgstr "Mehr Informationen dazu."
+msgstr "Weitere Informationen hierzu"
 
 #: includes/Fallback.php:11
 msgid "It looks like you have another CatFolders Document Gallery version installed, please delete it before activating this new version. All of the settings and data are still preserved."
 msgstr "Anscheinend haben Sie eine andere CatFolders Document Gallery-Version installiert. Bitte löschen Sie diese, bevor Sie die neue Version aktivieren. Alle Einstellungen und Daten bleiben dabei erhalten."
+
+#: includes/Engine/PostType.php:88
+msgid "Copied!"
+msgstr "Kopiert!"
+
+#: includes/Engine/PostType.php:85
+msgid "Copy the shortcode below and paste it into the editor to display the button."
+msgstr "Kopieren Sie den Shortcode unten und fügen Sie diesen in den Editor ein, um den Button anzuzeigen."
+
+#: includes/Engine/PostType.php:78
+msgid "Settings"
+msgstr "﻿Einstellungen"
+
+#: includes/Engine/PostType.php:77
+msgid "Preview"
+msgstr "Vorschau"
+
+#: includes/Engine/PostType.php:76 includes/Engine/PostType.php:186
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: includes/Engine/PostType.php:40
+msgid "All Document Gallery"
+msgstr "Alle Dokumenten-Galerien"
+
+#: includes/Engine/PostType.php:39
+msgid "Edit Document Gallery"
+msgstr "Dokumenten-Galerie bearbeiten"
+
+#: includes/Engine/PostType.php:37 includes/Engine/PostType.php:38
+msgid "Add New Document Gallery"
+msgstr "Neue Dokumenten-Galerie hinzufügen"
+
+#: includes/Engine/PostType.php:26 includes/Engine/PostType.php:27
+#: includes/Engine/PostType.php:35 includes/Engine/PostType.php:36
+msgid "Document Gallery"
+msgstr "Dokumenten-Galerie"
 
 #. translators: %s: Woocommerce link
 #: includes/Engine/ActDeact.php:17
@@ -64,9 +401,21 @@ msgid "CatFolders Document Gallery is enabled but not effective. It requires %s 
 msgstr "CatFolders Document Gallery ist aktiviert, aber nicht funktionsfähig. Es erfordert %s, um zu funktionieren."
 
 #. Author URI of the plugin
+#: catfolders-document-gallery.php
 msgid "https://wpmediafolders.com/"
 msgstr "https://wpmediafolders.com/"
 
+#. Author of the plugin
+#: catfolders-document-gallery.php
+msgid "CatFolders"
+msgstr "CatFolders"
+
 #. Description of the plugin
+#: catfolders-document-gallery.php
 msgid "Display WordPress PDF gallery from folder. This WordPress document gallery is 100% free, supports unlimited file types, and works great with CatFolders - WP Media Folders."
 msgstr "WordPress PDF-Galerie aus Ordner anzeigen. Diese WordPress-Dokumentengalerie ist 100 % kostenlos, unterstützt unbegrenzt viele Dateitypen und funktioniert hervorragend mit CatFolders - WP Media Folders."
+
+#. Plugin Name of the plugin
+#: catfolders-document-gallery.php build/apps/app.js:1 build/index.js:1
+msgid "CatFolders Document Gallery"
+msgstr "CatFolders Document Gallery"

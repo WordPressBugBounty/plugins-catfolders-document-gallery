@@ -90,7 +90,7 @@ class FolderHierarchy {
     private function getAllFolders() {
         if ($this->allFolders === null) {
             $this->allFolders = [];
-            $results = $this->wpdb->get_results("SELECT * FROM " . $this->wpdb->prefix . "catfolders");
+            $results = $this->wpdb->get_results("SELECT * FROM " . $this->wpdb->prefix . "catfolders order by ord ASC");
             foreach ($results as $row) {
                 if (!isset($this->allFolders[$row->parent])) {
                     $this->allFolders[$row->parent] = [];
@@ -110,7 +110,7 @@ class FolderHierarchy {
         return '<i class="cfdoc_breadcrumb_home_icon"><svg width="20px" height="22.5px" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"></path></svg></i>';
     }
     public function get_lv1_children($folder_id, $wrap = true) {
-        $children = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM ".$this->wpdb->prefix . "catfolders WHERE parent = %d", $folder_id));
+        $children = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM ".$this->wpdb->prefix . "catfolders WHERE parent = %d order by ord ASC", $folder_id));
         $html = $wrap ? '<div class="cfdoc_children">' : '';
         $html .= '<ul>';
         if($children) {

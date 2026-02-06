@@ -17,7 +17,7 @@ $libraryType   = $attributes['libraryType'];
 $showBreadCrumb = $attributes['showBreadCrumb'];
 $isNestedFolders = $attributes['isNestedFolders'];
 $searchScope = $attributes['searchScope'];
-$is_hierarchical_folders = ($libraryType == 'hierarchical_folders');
+$isHierarchicalFolders = ($libraryType == 'hierarchical_folders');
 
 global $wpdb;
 ?>
@@ -32,14 +32,14 @@ global $wpdb;
 			<?php endif; ?>
 
 			<?php
-			if($is_hierarchical_folders && $showBreadCrumb) {
+			if($isHierarchicalFolders && $showBreadCrumb) {
 				$cfdoc_folder_hierarchy = new FolderHierarchy($wpdb);
 				$selected_folder_id = (isset($attributes['folders']) && is_array($attributes['folders'])) ? (int)$attributes['folders'][0] : 0;
 				if($selected_folder_id > 0) {
 					echo $cfdoc_folder_hierarchy->render_hierarchy($selected_folder_id);
 				}
 			}
-			if($is_hierarchical_folders && $isNestedFolders) {
+			if($isHierarchicalFolders && $isNestedFolders) {
 				if(!isset($cfdoc_folder_hierarchy)) {
 					$cfdoc_folder_hierarchy = new FolderHierarchy($wpdb);
 				}

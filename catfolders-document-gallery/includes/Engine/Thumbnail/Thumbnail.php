@@ -8,13 +8,13 @@ class Thumbnail {
 	use SingletonTrait;
 
 	protected function __construct() {
-		add_action( 'init', array( $this, 'run' ) );
+		// add_action( 'init', array( $this, 'run' ) );
 	}
 
-	public function run() {
-		$verify_imagick = $this->verify_imagick();
-		Helper::register_localize_script(['verify_imagick' => $verify_imagick]);
-	}
+	// public function run() {
+	// 	$verify_imagick = $this->verify_imagick();
+	// 	Helper::register_localize_script(['verify_imagick' => $verify_imagick]);
+	// }
 
 	public function verify_imagick() {
 		$imageMagick_ver       = $this->get_imageMagick_version();

@@ -4,7 +4,7 @@ namespace CatFolder_Document_Gallery\Engine;
 
 use CatFolder_Document_Gallery\Helpers\Helper;
 use CatFolder_Document_Gallery\Utils\SingletonTrait;
-
+use CatFolder_Document_Gallery\Engine\Thumbnail\Thumbnail;
 class Shortcode {
 	use SingletonTrait;
 
@@ -26,7 +26,6 @@ class Shortcode {
 		);
 
 		$attributes = Helper::get_shortcode_data( $args );
-		$this->enqueue_scripts();
 
 		ob_start();
 
@@ -36,26 +35,4 @@ class Shortcode {
 
 	}
 
-	private function enqueue_scripts() {
-		wp_enqueue_script( 'catf-dg-datatables' );
-		wp_enqueue_script( 'catf-dg-datatables-natural' );
-		wp_enqueue_script( 'catf-dg-datatables-filesize' );
-		wp_enqueue_script( 'catf-dg-datatables-responsive' );
-		wp_enqueue_script( 'catf-dg-frontend', CATF_DG_URL . 'build/view.js', array( 'wp-i18n' ), CATF_DG_VERSION );
-
-		wp_enqueue_style( 'catf-dg-datatables' );
-		wp_enqueue_style( 'catf-dg-frontend' );
-		wp_enqueue_style( 'catf-dg-datatables-responsive' );
-
-		$args = [
-			'api'       => array(
-				'rest_nonce' => wp_create_nonce( 'wp_rest' ),
-				'rest_url'   => esc_url_raw( rest_url( 'CatFolders/v1' ) ),
-			),
-		];
-
-		wp_set_script_translations( "catf-dg-frontend", 'catfolders-document-gallery', CATF_DG_DIR . '/languages/' );
-
-		Helper::register_localize_script($args);
-	}
 }

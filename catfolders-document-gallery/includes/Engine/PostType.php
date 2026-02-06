@@ -13,7 +13,6 @@ class PostType {
 		add_action( 'admin_menu', array( $this, 'add_submenu_catfolders_plugin' ), 12 );
 		add_action( 'init', array( $this, 'register_catfolder_post_type' ) );
 		add_action( 'add_meta_boxes', array( $this, 'register_meta_boxes' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'save_post', array( $this, 'save_meta_boxes' ), 10, 3 );
 
 		add_filter( "manage_{$this->post_type}_posts_columns", array( $this, 'manager_documents_columns' ), 10, 1 );
@@ -104,29 +103,6 @@ class PostType {
 		<?php
 	}
 
-	public function admin_enqueue_scripts() {
-		$current_screen = get_current_screen();
-
-		if ( $this->post_type === $current_screen->id ) {
-			wp_enqueue_script( 'catf-dg-datatables' );
-			wp_enqueue_script( 'catf-dg-datatables-natural' );
-			wp_enqueue_script( 'catf-dg-datatables-filesize' );
-			wp_enqueue_script( 'catf-dg-datatables-responsive' );
-			wp_enqueue_script( 'catf-dg-react-app', CATF_DG_URL . 'build/apps/app.js', array( 'react', 'react-dom', 'wp-components', 'wp-element', 'wp-i18n' ), CATF_DG_VERSION );
-			wp_enqueue_script( 'catf-dg-shortcode-settings', CATF_DG_URL . 'assets/js/shortcode/events.js', array(), CATF_DG_VERSION );
-
-			wp_enqueue_style( 'catf-dg-datatables' );
-			wp_enqueue_style( 'catf-dg-frontend' );
-			wp_enqueue_style( 'catf-dg-datatables-responsive' );
-			wp_enqueue_style( 'wp-components' );
-			wp_enqueue_style( 'catf-dg-post-type', CATF_DG_URL . 'build/apps/app.css', array(), CATF_DG_VERSION );
-
-		}
-
-		if ( "edit-{$this->post_type}" === $current_screen->id ) {
-			wp_enqueue_script( 'catf-dg-shortcode-settings', CATF_DG_URL . 'assets/js/shortcode/events.js', array(), CATF_DG_VERSION );
-		}
-	}
 
 	public function save_meta_boxes( $post_id, $post, $update ) {
 		if ( $this->post_type !== $post->post_type ) {
@@ -142,7 +118,6 @@ class PostType {
 		if ( empty( $meta_values ) ) {
 			return;
 		}
-
 		update_post_meta( $post_id, 'shortcode_settings', $meta_values );
 	}
 
@@ -150,14 +125,16 @@ class PostType {
 		$meta_values = array();
 
 		$defaults_data = Helper::get_defaults_attribute();
-
-		if ( ! isset( $post_data['folders'] ) ) {
-			return $meta_values;
-		} else {
+		if( isset( $post_data['folders'] ) && is_string( $post_data['folders'] ) ) {
 			$post_data['folders'] = json_decode( stripslashes( $post_data['folders'] ), true );
+		}
 
-			foreach ( $defaults_data as $key => $value ) {
-				$meta_values[ $key ] = isset( $post_data[ $key ] ) ? $this->sanitize_data( $post_data[ $key ] ) : $defaults_data[ $key ];
+		foreach ( $defaults_data as $key => $value ) {
+			if( isset( $post_data[ $key ] ) ) {
+				$nonSanitizeKeys = array( 'actionIconSvg' );
+				$meta_values[ $key ] = in_array( $key, $nonSanitizeKeys ) ? $post_data[ $key ] : $this->sanitize_data( $post_data[ $key ] );
+			} else {
+				$meta_values[ $key ] = $defaults_data[ $key ];
 			}
 		}
 
