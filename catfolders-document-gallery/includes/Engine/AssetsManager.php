@@ -167,6 +167,7 @@ class AssetsManager {
 
 		// Admin-specific assets
 		wp_enqueue_script( 'catf-dg-react-app' );
+		wp_set_script_translations( 'catf-dg-react-app', 'catfolders-document-gallery', CATF_DG_DIR . '/languages/' );
 		wp_enqueue_script( 'catf-dg-shortcode-settings' );
 		wp_enqueue_media();
 

@@ -1,34 +1,38 @@
-# Copyright (C) 2024 CatFolders
+# Copyright (C) 2026 CatFolders
 # This file is distributed under the same license as the CatFolders Document Gallery plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CatFolders Document Gallery 1.4.1\n"
+"Project-Id-Version: CatFolders Document Gallery 2.0.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/CatFolders-Addons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-02-01T04:59:14+00:00\n"
+"POT-Creation-Date: 2026-03-17T08:50:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: catfolders-document-gallery\n"
 
 #. Plugin Name of the plugin
+#: catfolders-document-gallery.php
 #: build/apps/app.js:1
 #: build/index.js:1
 msgid "CatFolders Document Gallery"
 msgstr ""
 
 #. Description of the plugin
+#: catfolders-document-gallery.php
 msgid "Display WordPress PDF gallery from folder. This WordPress document gallery is 100% free, supports unlimited file types, and works great with CatFolders - WP Media Folders."
 msgstr ""
 
 #. Author of the plugin
+#: catfolders-document-gallery.php
 msgid "CatFolders"
 msgstr ""
 
 #. Author URI of the plugin
+#: catfolders-document-gallery.php
 msgid "https://wpmediafolders.com/"
 msgstr ""
 
@@ -37,44 +41,44 @@ msgstr ""
 msgid "CatFolders Document Gallery is enabled but not effective. It requires %s in order to work"
 msgstr ""
 
+#: includes/Engine/PostType.php:25
 #: includes/Engine/PostType.php:26
-#: includes/Engine/PostType.php:27
+#: includes/Engine/PostType.php:34
 #: includes/Engine/PostType.php:35
-#: includes/Engine/PostType.php:36
 msgid "Document Gallery"
 msgstr ""
 
+#: includes/Engine/PostType.php:36
 #: includes/Engine/PostType.php:37
-#: includes/Engine/PostType.php:38
 msgid "Add New Document Gallery"
 msgstr ""
 
-#: includes/Engine/PostType.php:39
+#: includes/Engine/PostType.php:38
 msgid "Edit Document Gallery"
 msgstr ""
 
-#: includes/Engine/PostType.php:40
+#: includes/Engine/PostType.php:39
 msgid "All Document Gallery"
 msgstr ""
 
-#: includes/Engine/PostType.php:76
-#: includes/Engine/PostType.php:186
+#: includes/Engine/PostType.php:75
+#: includes/Engine/PostType.php:163
 msgid "Shortcode"
 msgstr ""
 
-#: includes/Engine/PostType.php:77
+#: includes/Engine/PostType.php:76
 msgid "Preview"
 msgstr ""
 
-#: includes/Engine/PostType.php:78
+#: includes/Engine/PostType.php:77
 msgid "Settings"
 msgstr ""
 
-#: includes/Engine/PostType.php:85
+#: includes/Engine/PostType.php:84
 msgid "Copy the shortcode below and paste it into the editor to display the button."
 msgstr ""
 
-#: includes/Engine/PostType.php:88
+#: includes/Engine/PostType.php:87
 msgid "Copied!"
 msgstr ""
 
@@ -83,54 +87,78 @@ msgid "It looks like you have another CatFolders Document Gallery version instal
 msgstr ""
 
 #: includes/Fallback.php:12
+#: includes/FallbackMinimumWp.php:19
 msgid "Read more details."
 msgstr ""
 
-#: includes/Helpers/Helper.php:136
+#: includes/FallbackMinimumWp.php:16
+msgid "CatFolders Document Gallery requires WordPress 5.9.0 to work and does not support your current WordPress version %1$s."
+msgstr ""
+
+#: includes/Helpers/Helper.php:225
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Image"
+msgstr ""
+
+#: includes/Helpers/Helper.php:229
 #: build/apps/app.js:1
 #: build/index.js:1
 msgid "Title"
 msgstr ""
 
-#: includes/Helpers/Helper.php:140
+#: includes/Helpers/Helper.php:233
 #: build/apps/app.js:1
 #: build/index.js:1
 msgid "Type"
 msgstr ""
 
-#: includes/Helpers/Helper.php:144
+#: includes/Helpers/Helper.php:237
 #: build/apps/app.js:1
 #: build/index.js:1
 msgid "Size"
 msgstr ""
 
-#: includes/Helpers/Helper.php:148
-#: includes/Helpers/Helper.php:231
+#: includes/Helpers/Helper.php:241
+#: includes/Helpers/Helper.php:372
 #: build/apps/app.js:1
 #: build/index.js:1
 msgid "Updated"
 msgstr ""
 
-#: includes/Helpers/Helper.php:152
+#: includes/Helpers/Helper.php:245
 #: build/apps/app.js:1
+#: build/index.js:1
+msgid "Counter"
+msgstr ""
+
+#: includes/Helpers/Helper.php:249
 #: build/index.js:1
 msgid "Link"
 msgstr ""
 
-#: includes/Helpers/Helper.php:237
-#: build/apps/app.js:1
-#: build/index.js:1
+#: includes/Helpers/Helper.php:398
 msgid "Download"
 msgstr ""
 
 #: build/apps/app.js:1
 #: build/index.js:1
-msgid "Oops, you don't have any folder"
+msgid "Empty folder"
 msgstr ""
 
 #: build/apps/app.js:1
 #: build/index.js:1
-msgid "Create your first folder"
+msgid "You don't have any folders yet?"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Let's start by creating one."
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Create a folder"
 msgstr ""
 
 #: build/apps/app.js:1
@@ -180,6 +208,22 @@ msgstr ""
 
 #: build/apps/app.js:1
 #: build/index.js:1
+msgid "Narrow"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+#: build/view.js:1
+msgid "All"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Action"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
 msgid "Preview File"
 msgstr ""
 
@@ -225,6 +269,16 @@ msgstr ""
 
 #: build/apps/app.js:1
 #: build/index.js:1
+msgid "Display as a single folder"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Display as hierarchical folders"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
 msgid "Top"
 msgstr ""
 
@@ -241,12 +295,6 @@ msgstr ""
 #: build/apps/app.js:1
 #: build/index.js:1
 msgid "Hide"
-msgstr ""
-
-#: build/apps/app.js:1
-#: build/index.js:1
-#: build/view.js:1
-msgid "All"
 msgstr ""
 
 #: build/apps/app.js:1
@@ -283,6 +331,11 @@ msgstr ""
 #: build/index.js:1
 #: build/view.js:1
 msgid ": activate to sort column descending"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Icon"
 msgstr ""
 
 #: build/apps/app.js:1
@@ -347,6 +400,11 @@ msgstr ""
 
 #: build/apps/app.js:1
 #: build/index.js:1
+msgid "Document Icons"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
 msgid "Search Bar Placement"
 msgstr ""
 
@@ -372,7 +430,135 @@ msgstr ""
 
 #: build/apps/app.js:1
 #: build/index.js:1
+msgid "Column Label"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Button Label"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Use Custom SVG Icon"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Enter your custom SVG code below"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Select an icon from WordPress Media Library"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Custom SVG Code"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Enter SVG code here..."
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Paste your SVG code here. Make sure it's valid SVG markup."
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Selected icon"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Remove"
+msgstr ""
+
+#: build/apps/app.js:1
+msgid "Choose Image"
+msgstr ""
+
+#: build/apps/app.js:1
+msgid "Select"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Change Icon"
+msgstr ""
+
+#: build/apps/app.js:1
+msgid "Select Icon"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Choose an image from your WordPress Media Library to use as the action button icon."
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+#: build/view.js:1
 msgid "Network response was not ok."
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Folders"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Library Type"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "You can select multiple folders in different levels. All files will be displayed all together in a single list."
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "You can select only one main folder. Its sub-folders will also be included in the folder tree. Your selected main folder will be the root folder."
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Search scope"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Structure Display"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Breadcrumb"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Nested Folders"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "General Options"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Action Options"
+msgstr ""
+
+#: build/apps/app.js:1
+#: build/index.js:1
+msgid "Display Options"
 msgstr ""
 
 #: build/apps/app.js:1
@@ -386,15 +572,7 @@ msgid "Please select your folders that you want display"
 msgstr ""
 
 #: build/index.js:1
-msgid "Display Options"
-msgstr ""
-
-#: build/index.js:1
-msgid "Folders"
-msgstr ""
-
-#: build/index.js:1
-msgid "General Options"
+msgid "Select Icon from Media Library"
 msgstr ""
 
 #: build/view.js:1

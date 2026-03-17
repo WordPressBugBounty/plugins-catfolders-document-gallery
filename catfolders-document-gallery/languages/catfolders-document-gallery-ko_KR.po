@@ -1,0 +1,547 @@
+# Copyright (C) 2024 CatFolders
+# This file is distributed under the same license as the CatFolders Document Gallery plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: CatFolders Document Gallery 1.4.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/CatFolders-"
+"Addons\n"
+"POT-Creation-Date: 2026-03-17T08:50:25+00:00\n"
+"PO-Revision-Date: 2026-03-17 16:00+0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ko_KR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+"X-Domain: catfolders-document-gallery\n"
+
+#. Plugin Name of the plugin
+#: catfolders-document-gallery.php build/apps/app.js:1 build/index.js:1
+msgid "CatFolders Document Gallery"
+msgstr ""
+
+#. Description of the plugin
+#: catfolders-document-gallery.php
+msgid ""
+"Display WordPress PDF gallery from folder. This WordPress document gallery "
+"is 100% free, supports unlimited file types, and works great with CatFolders "
+"- WP Media Folders."
+msgstr ""
+
+#. Author of the plugin
+#: catfolders-document-gallery.php
+msgid "CatFolders"
+msgstr ""
+
+#. Author URI of the plugin
+#: catfolders-document-gallery.php
+msgid "https://wpmediafolders.com/"
+msgstr ""
+
+#. translators: %s: Woocommerce link
+#: includes/Engine/ActDeact.php:17
+msgid ""
+"CatFolders Document Gallery is enabled but not effective. It requires %s in "
+"order to work"
+msgstr ""
+"CatFolders Document Gallery가 활성화되었지만 작동하지 않습니다. 작동하려면 %s"
+"이(가) 필요합니다."
+
+#: includes/Engine/PostType.php:25 includes/Engine/PostType.php:26
+#: includes/Engine/PostType.php:34 includes/Engine/PostType.php:35
+msgid "Document Gallery"
+msgstr "문서 갤러리"
+
+#: includes/Engine/PostType.php:36 includes/Engine/PostType.php:37
+msgid "Add New Document Gallery"
+msgstr "새 문서 갤러리 추가"
+
+#: includes/Engine/PostType.php:38
+msgid "Edit Document Gallery"
+msgstr "문서 갤러리 편집"
+
+#: includes/Engine/PostType.php:39
+msgid "All Document Gallery"
+msgstr "모든 문서 갤러리"
+
+#: includes/Engine/PostType.php:75 includes/Engine/PostType.php:163
+msgid "Shortcode"
+msgstr "숏코드"
+
+#: includes/Engine/PostType.php:76
+msgid "Preview"
+msgstr "미리보기"
+
+#: includes/Engine/PostType.php:77
+msgid "Settings"
+msgstr "설정"
+
+#: includes/Engine/PostType.php:84
+msgid ""
+"Copy the shortcode below and paste it into the editor to display the button."
+msgstr "아래의 숏코드를 복사하여 에디터에 붙여넣으면 버튼이 표시됩니다."
+
+#: includes/Engine/PostType.php:87
+msgid "Copied!"
+msgstr "복사되었습니다!"
+
+#: includes/Fallback.php:11
+msgid ""
+"It looks like you have another CatFolders Document Gallery version "
+"installed, please delete it before activating this new version. All of the "
+"settings and data are still preserved."
+msgstr ""
+"다른 버전의 CatFolders Document Gallery가 설치되어 있는 것 같습니다. 새 버전"
+"을 활성화하기 전에 이전 버전을 삭제해 주세요. 모든 설정과 데이터는 그대로 유"
+"지됩니다."
+
+#: includes/Fallback.php:12 includes/FallbackMinimumWp.php:19
+msgid "Read more details."
+msgstr "자세히 보기."
+
+#: includes/FallbackMinimumWp.php:16
+msgid ""
+"CatFolders Document Gallery requires WordPress 5.9.0 to work and does not "
+"support your current WordPress version %1$s."
+msgstr ""
+
+#: includes/Helpers/Helper.php:225 build/apps/app.js:1 build/index.js:1
+msgid "Image"
+msgstr "이미지"
+
+#: includes/Helpers/Helper.php:229 build/apps/app.js:1 build/index.js:1
+msgid "Title"
+msgstr "제목"
+
+#: includes/Helpers/Helper.php:233 build/apps/app.js:1 build/index.js:1
+msgid "Type"
+msgstr "유형"
+
+#: includes/Helpers/Helper.php:237 build/apps/app.js:1 build/index.js:1
+msgid "Size"
+msgstr "크기"
+
+#: includes/Helpers/Helper.php:241 includes/Helpers/Helper.php:372
+#: build/apps/app.js:1 build/index.js:1
+msgid "Updated"
+msgstr "업데이트됨"
+
+#: includes/Helpers/Helper.php:245 build/apps/app.js:1 build/index.js:1
+msgid "Counter"
+msgstr "카운터"
+
+#: includes/Helpers/Helper.php:249 build/index.js:1
+msgid "Link"
+msgstr "링크"
+
+#: includes/Helpers/Helper.php:398
+msgid "Download"
+msgstr "다운로드"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Empty folder"
+msgstr "빈 폴더"
+
+#: build/apps/app.js:1 build/index.js:1
+#, fuzzy
+msgid "You don't have any folders yet?"
+msgstr "죄송합니다. 폴더가 없습니다"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Let's start by creating one."
+msgstr "첫 번째 폴더를 만들어 보세요."
+
+#: build/apps/app.js:1 build/index.js:1
+#, fuzzy
+msgid "Create a folder"
+msgstr "첫 번째 폴더 만들기"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Thumbnail"
+msgstr "특성 이미지"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Medium"
+msgstr "중간"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Large"
+msgstr "크게"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Full Size"
+msgstr "전체 크기"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "List"
+msgstr "목록"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Grid"
+msgstr "그리드"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Modified"
+msgstr "수정됨"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Ascending"
+msgstr "오름차순"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Descending"
+msgstr "내림차순"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Narrow"
+msgstr "좁게"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "All"
+msgstr "전체"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Action"
+msgstr "동작"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Preview File"
+msgstr "파일 미리보기"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Popup Window"
+msgstr "팝업 창"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Download File"
+msgstr "파일 다운로드"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "None"
+msgstr "없음"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Paragraph"
+msgstr "단락"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Heading 1"
+msgstr "제목 1"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Heading 2"
+msgstr "제목 2"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Heading 3"
+msgstr "제목 3"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Heading 4"
+msgstr "제목 4"
+
+#: build/apps/app.js:1 build/index.js:1
+#, fuzzy
+msgid "Display as a single folder"
+msgstr "표시 필드"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Display as hierarchical folders"
+msgstr "계층적 폴더로 표시"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Top"
+msgstr "상단"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Bottom"
+msgstr "하단"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Both"
+msgstr "둘 다"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Hide"
+msgstr "숨기기"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "Search by title…"
+msgstr "제목으로 검색…"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "Search:"
+msgstr "검색:"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "Items per page"
+msgstr "페이지당 항목 수"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "of"
+msgstr "/"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid ": activate to sort column ascending"
+msgstr ": 열을 오름차순으로 정렬하려면 활성화"
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid ": activate to sort column descending"
+msgstr ": 열을 내림차순으로 정렬하려면 활성화"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Icon"
+msgstr "아이콘"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Library Title Text"
+msgstr "라이브러리 제목 텍스트"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Library Title Tag"
+msgstr "라이브러리 제목 태그"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Library Icon Alt Text"
+msgstr "라이브러리 아이콘 대체 텍스트"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Link To"
+msgstr "링크 대상"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Popup Width"
+msgstr "팝업 너비"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Popup Height"
+msgstr "팝업 높이"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Limit items"
+msgstr "항목 제한"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Sort By"
+msgstr "정렬 기준"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Sort Type"
+msgstr "정렬 유형"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Library Icon"
+msgstr "라이브러리 아이콘"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Show"
+msgstr "표시"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Library Title"
+msgstr "라이브러리 제목"
+
+#: build/apps/app.js:1 build/index.js:1
+#, fuzzy
+msgid "Document Icons"
+msgstr "문서 갤러리"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Search Bar Placement"
+msgstr "검색바 위치"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Pagination Placement"
+msgstr "페이지네이션 위치"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Layout Icon Placement"
+msgstr "레이아웃 아이콘 위치"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Layout Display"
+msgstr "레이아웃 표시"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Display Fields"
+msgstr "표시 필드"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Column Label"
+msgstr "열 레이블"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Button Label"
+msgstr "버튼 레이블"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Use Custom SVG Icon"
+msgstr "사용자 정의 SVG 아이콘 사용"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Enter your custom SVG code below"
+msgstr "아래에 사용자 정의 SVG 코드를 입력하세요"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Select an icon from WordPress Media Library"
+msgstr "워드프레스 미디어 라이브러리에서 아이콘 선택"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Custom SVG Code"
+msgstr "사용자 정의 SVG 코드"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Enter SVG code here..."
+msgstr "여기에 SVG 코드를 입력하세요..."
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Paste your SVG code here. Make sure it's valid SVG markup."
+msgstr "여기에 SVG 코드를 붙여넣으세요. 유효한 SVG 마크업인지 확인하세요."
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Selected icon"
+msgstr "선택된 아이콘"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Remove"
+msgstr "제거"
+
+#: build/apps/app.js:1
+msgid "Choose Image"
+msgstr "이미지 선택"
+
+#: build/apps/app.js:1
+msgid "Select"
+msgstr "선택"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Change Icon"
+msgstr "아이콘 변경"
+
+#: build/apps/app.js:1
+msgid "Select Icon"
+msgstr "아이콘 선택"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid ""
+"Choose an image from your WordPress Media Library to use as the action "
+"button icon."
+msgstr ""
+"작업 버튼 아이콘으로 사용할 이미지를 워드프레스 미디어 라이브러리에서 선택하"
+"세요."
+
+#: build/apps/app.js:1 build/index.js:1 build/view.js:1
+msgid "Network response was not ok."
+msgstr "네트워크 응답이 올바르지 않습니다."
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Folders"
+msgstr "폴더"
+
+#: build/apps/app.js:1 build/index.js:1
+#, fuzzy
+msgid "Library Type"
+msgstr "라이브러리 제목"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid ""
+"You can select multiple folders in different levels. All files will be "
+"displayed all together in a single list."
+msgstr ""
+"다양한 수준의 여러 폴더를 선택할 수 있습니다. 모든 파일이 단일 목록에 함께 표"
+"시됩니다."
+
+#: build/apps/app.js:1 build/index.js:1
+msgid ""
+"You can select only one main folder. Its sub-folders will also be included "
+"in the folder tree. Your selected main folder will be the root folder."
+msgstr ""
+"하나의 메인 폴더만 선택할 수 있습니다. 해당 하위 폴더도 폴더 트리에 포함됩니"
+"다. 선택한 메인 폴더가 루트 폴더가 됩니다."
+
+#: build/apps/app.js:1 build/index.js:1
+#, fuzzy
+msgid "Search scope"
+msgstr "검색:"
+
+#: build/apps/app.js:1 build/index.js:1
+#, fuzzy
+msgid "Structure Display"
+msgstr "레이아웃 표시"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Breadcrumb"
+msgstr "브레드크럼"
+
+#: build/apps/app.js:1 build/index.js:1
+#, fuzzy
+msgid "Nested Folders"
+msgstr "폴더"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "General Options"
+msgstr "일반 옵션"
+
+#: build/apps/app.js:1 build/index.js:1
+#, fuzzy
+msgid "Action Options"
+msgstr "표시 옵션"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Display Options"
+msgstr "표시 옵션"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Select folders to show content here"
+msgstr "여기에 콘텐츠를 표시할 폴더를 선택하세요"
+
+#: build/apps/app.js:1 build/index.js:1
+msgid "Please select your folders that you want display"
+msgstr "표시할 폴더를 선택해 주세요"
+
+#: build/index.js:1
+msgid "Select Icon from Media Library"
+msgstr "워드프레스 미디어 라이브러리에서 아이콘 선택"
+
+#: build/view.js:1
+msgid "List Layout Icon"
+msgstr "목록 레이아웃 아이콘"
+
+#: build/view.js:1
+msgid "Grid Layout Icon"
+msgstr "그리드 레이아웃 아이콘"
+
+#: build/view.js:1
+msgid "Next Button"
+msgstr "다음 버튼"
+
+#: build/view.js:1
+msgid "Previous Button"
+msgstr "이전 버튼"
+
+#: build/view.js:1
+msgid "No matching records found"
+msgstr "일치하는 기록을 찾을 수 없습니다"
+
+#: build/view.js:1
+msgid "Showing 0 to 0 of 0 entries"
+msgstr "0 - 0 / 전체 0개 항목 표시 중"
+
+#: build/view.js:1
+msgid "filtered from"
+msgstr "다음에서 필터링됨:"
+
+#: build/view.js:1
+msgid "total entries"
+msgstr "전체 항목"
+
+#: build/apps/block.json build/block.json
+msgctxt "block title"
+msgid "CatFolders Document Gallery"
+msgstr "CatFolders 문서 갤러리"
+
+#: build/apps/block.json build/block.json
+msgctxt "block description"
+msgid "Display folders item in a document gallery."
+msgstr "폴더 항목을 문서 갤러리에 표시합니다."

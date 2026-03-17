@@ -16,6 +16,6 @@ class I18n {
 		}
 		unload_textdomain( 'catfolders-document-gallery' );
 		load_textdomain( 'catfolders-document-gallery', CATF_DG_DIR . '/languages/catfolders-document-gallery-' . $locale . '.mo' );
-		load_plugin_textdomain( 'catfolders-document-gallery', false, CATF_DG_DIR . '/languages/' );
+		load_plugin_textdomain( 'catfolders-document-gallery', false, dirname( plugin_basename( CATF_DG_FILE ) ) . '/languages/' );
 	}
 }

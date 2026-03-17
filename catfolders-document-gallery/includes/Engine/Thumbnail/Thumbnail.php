@@ -58,7 +58,7 @@ class Thumbnail {
 			$verify['message']      = 'To enable file thumbnail generation, please make sure your server is configured properly.';
 			$verify['navigatePage'] = array(
 				'content' => 'Learn more.',
-				'url'     => 'https://wpmediafolders.com/docs/addons/document-gallery/',
+				'url'     => 'https://wpmediafolders.com/docs/addons/document-gallery/thumbnails/#generate-pdf-thumbnails',
 			);
 		}
 

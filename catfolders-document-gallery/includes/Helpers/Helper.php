@@ -105,7 +105,7 @@ class Helper {
 				'ID' => 'DESC',
 			),
 			'post_status'    => 'inherit',
-			'posts_per_page' => $limit,
+			'posts_per_page' => -1, // Get all posts, pagination handled by offset
 			's'              => $search,
 			'offset'         => ( $currentPage - 1 ) * $limit,
 		);
@@ -507,6 +507,7 @@ class Helper {
 		$verify_imagick = $thumbnail_instance->verify_imagick();
 		$args = [
 			'verify_imagick' => $verify_imagick,
+			'plugin_url' => CATF_DG_URL,
 			'api'       => array(
 				'rest_nonce' => wp_create_nonce( 'wp_rest' ),
 				'rest_url'   => esc_url_raw( rest_url( 'CatFolders/v1' ) ),

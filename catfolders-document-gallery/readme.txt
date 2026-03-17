@@ -1,15 +1,15 @@
-=== Document Gallery - Display PDF Gallery from Many Folders ===
+=== CatFolders Document Gallery & PDF Library ===
 Contributors: catfolders
 Donate link: https://wpmediafolders.com/ 
-Tags: documents, pdf, file gallery, document library, document management
+Tags: documents, pdf, downloads, document library, document management
 Requires at least: 6.1
 Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl.html
 
-Display WordPress PDF gallery and file gallery from folder. Comes with a clean, searchable & sortable list/grid layout.
+Display WordPress PDF gallery and file gallery from folders. Comes with a clean, searchable & sortable list/grid layout.
 
 == Description ==
 
@@ -74,15 +74,14 @@ It’s especially useful for WordPress websites that offer downloadable resource
 - Companies providing **white papers** or **reports**.
 - Nonprofits sharing **brochures** and **legal docs**.
 
-Let's bring your file collections to life on the front end—keep users engaged and guide them toward action. 
 Here’s what you get:
 
-- **Live content syncing**: Any changes made to your media folders are instantly reflected wherever they’re displayed—no need to edit pages manually.
+- **Live content syncing**: Any changes made to your media folders are instantly reflected wherever they’re displayed. No need to edit pages manually.
 - **Easy to explore**: Visitors can quickly locate files with a built-in search bar and organize the view by date, name, size, popularity, and more.
 - **Smooth browsing experience**: Load more items dynamically without refreshing the page, keeping navigation seamless.
 - **Optimized for all devices**: Whether on desktop, tablet, or smartphone, your content adapts beautifully to every screen.
 
-As an admin, you will get these advantages of the customization options: 
+As an admin, you will get the advantages of the customization options: 
 
 * Easily tweak the layout and columns.
 * Create a WordPress file gallery that fits perfectly with your website's design.
@@ -137,9 +136,14 @@ So you want us to add further integrations such as **Elementor pdf gallery**, an
 
 == Changelog ==
 
+= Mar 17, 2026 - Version 2.0.5 =
+- Added: Korean language
+- Improved: Folder tree UI
+
 = Dec 10, 2025 - Version 2.0.4 =
 - Added: Document click-to-preview options
 - Improved: German translations
+- Improved: Tested up to WordPress 6.9
 
 = Oct 10, 2025 - Version 2.0.3 =
 - Fixed: Sort function
