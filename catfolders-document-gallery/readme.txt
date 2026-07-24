@@ -3,7 +3,7 @@ Contributors: catfolders
 Donate link: https://wpmediafolders.com/ 
 Tags: documents, pdf, downloads, document library, document management
 Requires at least: 6.1
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.2
 Stable tag: 2.0.5
 License: GPL-3.0
@@ -13,20 +13,58 @@ Display WordPress PDF gallery and file gallery from folders. Comes with a clean,
 
 == Description ==
 
-**Document Gallery** is a 100% free addon for **CatFolders, a WordPress media folder plugin**. It allows users to create and display file galleries (especially for documents like PDFs, Word, Excel files, ebooks, etc.) directly on posts or pages using the block editor or a shortcode.
+**Document Gallery** is a free extension for the CatFolders plugin that makes it easy to publish document libraries on your WordPress site.
 
-With **Document Gallery**, you can:
+With a single **Gutenberg block** (or simple **shortcode**), you can point to any media folder and instantly display its contents on a page. 
 
-- Display a folder’s documents in a neat grid or list view.
-- Enable front-end file previews and downloads.
-- Customize how file titles, icons, and other metadata appear.
-- Filter files by folder, type, date, or topic.
+In seconds, a folder of PDFs, Word docs, spreadsheets, ebooks, and more becomes a neat, browsable on-page gallery. No manual link-building required and no file links altered.
+
+Visitors see each file as a clickable card (icon + title + first page image) and can open or download it without leaving the page.
+
+📌 [Documentation](https://wpmediafolders.com/docs/addons/document-gallery/) | [View Demo of PDF gallery with first page thumbnails](https://wpmediafolders.com/catfolders-document-gallery-demo/)
+
+## Key Features
+
+**Grid & List Layouts**
+Display any media folder as a clean grid of cards or a classic table list. Each entry shows a file-type icon or **PDF thumbnail** alongside the file title and an optional description.
+
+**Instant Previews & Downloads**
+Click a file card to preview it in-page or trigger a download. Document Gallery automatically generates first-page thumbnails for PDFs, so visitors always have a visual reference.
+
+**Search, Sort & Filter**
+Built-in search and filtering let users narrow results by folder, file type, date, and more. Pagination and load-more buttons keep large collections fast and easy to browse.
+
+**Customizable File Details**
+Choose which columns to display: file size, updated date, type icon, a Download button, or custom notes. All output inherits your active theme's styling for a polished, consistent look.
+
+**All Media Types Supported**
+Not just PDFs. Document Gallery works with Word, Excel, PowerPoint, images, audio, video, ebooks (EPUB, MOBI), and any custom file type stored in your WordPress media library. Suitable for any download-heavy site!
 
 💥 **New Feature: Nested Folders with Breadcrumb Navigation!**
 
 The CatFolders Document Gallery now supports **multi-level folder structure**, making it easier than ever to organize and present your documents. With intuitive breadcrumb navigation, your website visitors can quickly explore subfolders and find exactly what they need!
 
-📌 [Documentation](https://wpmediafolders.com/docs/addons/document-gallery/) | [Quick Demo](https://wpmediafolders.com/catfolders-document-gallery-demo/)
+**CatFolders Document Gallery** support displaying all WordPress file types:
+
+- Documents: pdf, doc, ppt, odt, xls
+- Graphics: psd, svg
+- eBooks: epub, mobi, azw, azw3
+- Images: jpg, jpeg, png, gif, ico, webp
+- Audios: mp3, m4a, ogg, wav
+- Videos: mp4, mov, wmv, avi, mpg
+- Others: svg, zip, json, and custom file types
+
+To get started with this WordPress PDF gallery plugin, simply follow these steps:
+
+1. Install CatFolders ([free](https://wordpress.org/plugins/catfolders/), or [pro version](https://wpmediafolders.com/))
+2. Install CatFolders Document Gallery (this plugin)
+3. Start organizing documents into folders
+4. Pick a folder to create WordPress gallery from folder
+5. Customize the gallery appearances and publish
+
+[youtube https://youtu.be/gLxi4CTItKE]
+
+###💪 WHY YOU SHOULD USE DOCUMENT GALLERY BY CATFOLDERS?
 
 It will save you a huge amount of time thanks to these built-in features:
 
@@ -42,30 +80,6 @@ It will save you a huge amount of time thanks to these built-in features:
 - Flexible pagination settings
 - Click to preview, open in a popup, or download any file
 
-###🎯 FEATURES
-
-**CatFolders Document Gallery** support displaying all WordPress file types:
-
-- Documents: pdf, doc, ppt, odt, xls
-- Graphics: psd, svg
-- eBooks: epub, mobi, azw, azw3
-- Images: jpg, jpeg, png, gif, ico, webp
-- Audios: mp3, m4a, ogg, wav
-- Videos: mp4, mov, wmv, avi, mpg
-- Others: svg, zip, json, and custom file types
-
-To get started with this WordPress PDF gallery plugin, simply follow these steps:
-
-1. Install CatFolders - [WP Media Folders free](https://wordpress.org/plugins/catfolders/), or [CatFolders pro version](https://wpmediafolders.com/)
-2. Install CatFolders Document Gallery (this plugin)
-3. Start organizing documents into folders
-4. Pick a folder to create WordPress gallery from folder
-5. Customize the gallery appearances and publish
-
-[youtube https://youtu.be/gLxi4CTItKE]
-
-###💪 WHY YOU SHOULD USE DOCUMENT GALLERY BY CATFOLDERS?
-
 It’s especially useful for WordPress websites that offer downloadable resources, such as:
 
 - eCommerce websites offering **digital products** or **file downloads**.
@@ -73,23 +87,6 @@ It’s especially useful for WordPress websites that offer downloadable resource
 - Schools or universities sharing **study materials**.
 - Companies providing **white papers** or **reports**.
 - Nonprofits sharing **brochures** and **legal docs**.
-
-Here’s what you get:
-
-- **Live content syncing**: Any changes made to your media folders are instantly reflected wherever they’re displayed. No need to edit pages manually.
-- **Easy to explore**: Visitors can quickly locate files with a built-in search bar and organize the view by date, name, size, popularity, and more.
-- **Smooth browsing experience**: Load more items dynamically without refreshing the page, keeping navigation seamless.
-- **Optimized for all devices**: Whether on desktop, tablet, or smartphone, your content adapts beautifully to every screen.
-
-As an admin, you will get the advantages of the customization options: 
-
-* Easily tweak the layout and columns.
-* Create a WordPress file gallery that fits perfectly with your website's design.
-* Keep your documents and files organized within folders.
-* Dynamically update your galleries.
-* 100% free: No need to upgrade as this is already packed with premium features. Yay!
-
-As you add new documents to your folders, it will automatically reflect those changes. This will ensure that your visitors always have access to the most up-to-date information.
 
 Happy gallery-ing 💖
 
