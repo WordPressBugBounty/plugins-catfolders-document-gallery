@@ -27,6 +27,8 @@ class Shortcode {
 
 		$attributes = Helper::get_shortcode_data( $args );
 
+		AssetsManager::get_instance()->enqueue_frontend_assets( true );
+
 		ob_start();
 
 		include CATF_DG_DIR . '/includes/Engine/Views/Table.php';

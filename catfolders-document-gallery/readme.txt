@@ -5,7 +5,7 @@ Tags: documents, pdf, downloads, document library, document management
 Requires at least: 6.1
 Tested up to: 7.0
 Requires PHP: 7.2
-Stable tag: 2.0.5
+Stable tag: 2.0.7
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -132,6 +132,13 @@ So you want us to add further integrations such as **Elementor pdf gallery**, an
 7. Tabbed filterable gallery with PDF first page thumbnails.
 
 == Changelog ==
+
+= Aug 3, 2026 - Version 2.0.7 =
+- Added: Folder tree sidebar in front-end gallery
+- Added: Settings page
+- Added: Hooks
+- Updated: Security
+- Fixed: Download count feature
 
 = Mar 17, 2026 - Version 2.0.5 =
 - Added: Korean language

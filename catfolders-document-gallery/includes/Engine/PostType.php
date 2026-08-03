@@ -9,9 +9,33 @@ class PostType {
 
 	private $post_type = 'catfolder-post-type';
 
+	/**
+	 * Base name used to build the post type's custom capabilities,
+	 * e.g. edit_catfolder_documents, publish_catfolder_documents, ...
+	 */
+	private $capability_type = array( 'catfolder_document', 'catfolder_documents' );
+
+	/**
+	 * Option storing the roles allowed to manage the Document Gallery post type.
+	 * Editable from the "Settings" submenu. Holds real WP role slugs.
+	 */
+	const ALLOWED_ROLES_OPTION = 'catf_dg_allowed_roles';
+
+	/**
+	 * Default allowed roles used when the option has never been saved.
+	 */
+	const DEFAULT_ALLOWED_ROLES = array( 'administrator' );
+
+	/**
+	 * Bump this when the capability list changes so existing installs re-sync.
+	 */
+	const CAPS_OPTION  = 'catf_dg_caps_version';
+	const CAPS_VERSION = '1';
+
 	private function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_submenu_catfolders_plugin' ), 12 );
 		add_action( 'init', array( $this, 'register_catfolder_post_type' ) );
+		add_action( 'admin_init', array( $this, 'maybe_sync_capabilities' ) );
 		add_action( 'add_meta_boxes', array( $this, 'register_meta_boxes' ) );
 		add_action( 'save_post', array( $this, 'save_meta_boxes' ), 10, 3 );
 
@@ -24,9 +48,108 @@ class PostType {
 			'cat_folders',
 			__( 'Document Gallery', 'catfolders-document-gallery' ),
 			__( 'Document Gallery', 'catfolders-document-gallery' ),
-			'manage_options',
+			$this->get_primary_capability(),
 			'edit.php?post_type=catfolder-post-type'
 		);
+	}
+
+	/**
+	 * The primitive capability required to see the menu and open the list table.
+	 */
+	private function get_primary_capability() {
+		return 'edit_' . $this->capability_type[1];
+	}
+
+	/**
+	 * Full list of primitive capabilities generated for this post type.
+	 */
+	private function get_post_type_capabilities() {
+		$plural = $this->capability_type[1];
+
+		return array(
+			"edit_{$plural}",
+			"edit_others_{$plural}",
+			"edit_private_{$plural}",
+			"edit_published_{$plural}",
+			"publish_{$plural}",
+			"read_private_{$plural}",
+			"delete_{$plural}",
+			"delete_private_{$plural}",
+			"delete_published_{$plural}",
+			"delete_others_{$plural}",
+		);
+	}
+
+	/**
+	 * Roles currently allowed to manage the post type (from the settings option).
+	 */
+	public function get_allowed_roles() {
+		$roles = get_option( self::ALLOWED_ROLES_OPTION, self::DEFAULT_ALLOWED_ROLES );
+
+		return is_array( $roles ) ? $roles : self::DEFAULT_ALLOWED_ROLES;
+	}
+
+	/**
+	 * Re-apply capabilities: strip them from every role, then grant to the
+	 * currently allowed roles. Call this after the allowed roles change.
+	 */
+	public function sync_capabilities() {
+		$this->remove_capabilities();
+		$this->add_capabilities();
+	}
+
+	/**
+	 * Grant the post type capabilities to every allowed role.
+	 * Safe to run repeatedly.
+	 */
+	public function add_capabilities() {
+		$caps = $this->get_post_type_capabilities();
+
+		foreach ( $this->get_allowed_roles() as $role_slug ) {
+			$role = get_role( $role_slug );
+			if ( ! $role ) {
+				continue;
+			}
+			foreach ( $caps as $cap ) {
+				$role->add_cap( $cap );
+			}
+		}
+	}
+
+	/**
+	 * Remove the post type capabilities from every role that might have them.
+	 */
+	public function remove_capabilities() {
+		$caps  = $this->get_post_type_capabilities();
+		$roles = wp_roles();
+
+		if ( ! $roles ) {
+			return;
+		}
+
+		foreach ( array_keys( $roles->roles ) as $role_slug ) {
+			$role = get_role( $role_slug );
+			if ( ! $role ) {
+				continue;
+			}
+			foreach ( $caps as $cap ) {
+				$role->remove_cap( $cap );
+			}
+		}
+	}
+
+	/**
+	 * Self-heal capabilities for installs that were already activated
+	 * before this feature (or when the allowed roles / caps change).
+	 */
+	public function maybe_sync_capabilities() {
+		if ( get_option( self::CAPS_OPTION ) === self::CAPS_VERSION ) {
+			return;
+		}
+
+		$this->sync_capabilities();
+
+		update_option( self::CAPS_OPTION, self::CAPS_VERSION );
 	}
 
 	public function register_catfolder_post_type() {
@@ -41,15 +164,6 @@ class PostType {
 
 		$supports = array( 'title' );
 
-		$capabilities = array(
-			'edit_post'     => 'manage_options',
-			'read_post'     => 'manage_options',
-			'delete_post'   => 'manage_options',
-			'edit_posts'    => 'manage_options',
-			'delete_posts'  => 'manage_options',
-			'publish_posts' => 'manage_options',
-		);
-
 		$args = array(
 			'labels'             => $labels,
 			'public'             => true,
@@ -61,7 +175,8 @@ class PostType {
 			'menu_icon'          => 'dashicons-media-document',
 			'query_var'          => $this->post_type,
 			'supports'           => $supports,
-			'capabilities'       => $capabilities,
+			'capability_type'    => $this->capability_type,
+			'map_meta_cap'       => true,
 		);
 
 		$result = register_post_type( $this->post_type, $args );

@@ -154,5 +154,6 @@
     "catf-dg-frontend",
     "catf-dg-datatables-responsive"
   ],
-  "viewScript": "file:./view.js"
+  "viewScript": "catf-dg-frontend",
+  "viewStyle": "catf-dg-frontend"
 }

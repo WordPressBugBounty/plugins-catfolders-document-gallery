@@ -19,7 +19,7 @@ class FolderHierarchy {
 
             foreach ($parents as $k => $folder) {
                 $children = $this->get_children($folder->id);
-                $html .= '<li data-id="'.intval( $folder->id ).'" class="'. (($k == 0) ? 'cfdoc-home-item ' : '') . (!empty($children) ? 'has-children ' : '') .'">'.(($k == 0) ? $this->homeIcon() : '') . '<span>'.esc_html($folder->title).'</span>';
+                $html .= '<li data-id="'.esc_attr( Helper::encrypt( $folder->id ) ).'" class="'. (($k == 0) ? 'cfdoc-home-item ' : '') . (!empty($children) ? 'has-children ' : '') .'">'.(($k == 0) ? $this->homeIcon() : '') . '<span>'.esc_html($folder->title).'</span>';
                 
                 if(!empty($children)) {
                     $html .= $this->downArrowIcon();
@@ -34,7 +34,7 @@ class FolderHierarchy {
         
             $folder = Helper::get_folder_detail( $folder_id );
             if( is_object( $folder ) ) {
-                $html .= '<li data-id="'.intval( $folder_id ).'" class="cfdoc-home-item '. (!empty($children) ? 'has-children' : '') .'">' . $this->homeIcon() . '<span>'.esc_html($folder->title).'</span>';
+                $html .= '<li data-id="'.esc_attr( Helper::encrypt( $folder_id ) ).'" class="cfdoc-home-item '. (!empty($children) ? 'has-children' : '') .'">' . $this->homeIcon() . '<span>'.esc_html($folder->title).'</span>';
                 $children = $this->get_children($folder_id);
                 if(!empty($children)) {
                     $html .= $this->downArrowIcon();
@@ -79,7 +79,7 @@ class FolderHierarchy {
         $html = '<ul class="children">';
         foreach ($allFolders[$folder_id] as $child) {
             $_child = $this->get_children( $child->id, $allFolders );
-            $html .= '<li class="' . (!empty($_child) ? 'has-childrend' : '') . '" data-id="' . intval($child->id) . '"><span>' . esc_html($child->title) . '</span>';
+            $html .= '<li class="' . (!empty($_child) ? 'children' : '') . '" data-id="' . esc_attr( Helper::encrypt( $child->id ) ) . '"><span>' . esc_html($child->title) . '</span>';
             $html .= $_child;
             $html .= '</li>';
         }
@@ -115,7 +115,7 @@ class FolderHierarchy {
         $html .= '<ul>';
         if($children) {
             foreach($children as $child) {
-                $html .= '<li data-id="'.intval( $child->id ).'"><i>
+                $html .= '<li data-id="'.esc_attr( Helper::encrypt( $child->id ) ).'"><i>
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z"></path>
                     </svg>

@@ -1,11 +1,15 @@
 <?php
+/** @var array $attributes */
+
 use CatFolder_Document_Gallery\Helpers\Helper;
 use CatFolder_Document_Gallery\Helpers\FolderHierarchy;
 
-$data    = Helper::get_attachments( $attributes );
+// $data    = Helper::get_attachments( $attributes );
 $columns = Helper::generate_columns( $attributes['displayColumns'] );
+$columns = apply_filters( 'catf_dg_table_columns', $columns, $attributes );
 
-$libraryTitleTag    = $attributes['titleTag'];
+$allowedTitleTags   = array( 'p', 'h1', 'h2', 'h3', 'h4' );
+$libraryTitleTag    = in_array( $attributes['titleTag'], $allowedTitleTags, true ) ? $attributes['titleTag'] : 'p';
 $libraryTitle       = $attributes['title'];
 $libraryIconAltText = $attributes['libraryIcon']['altText'];
 $gridColumn         = $attributes['gridColumn'];
@@ -20,8 +24,17 @@ $searchScope = $attributes['searchScope'];
 $isHierarchicalFolders = ($libraryType == 'hierarchical_folders');
 
 global $wpdb;
+
+$json_attributes            = $attributes;
+$json_attributes['folders'] = array_map( array( Helper::class, 'encrypt' ), $attributes['folders'] );
+
+// Signed scope of this gallery instance. The frontend sends it back on every
+// AJAX call so the endpoints authorize requests against the folders actually
+// published here, instead of trusting a client-supplied (and forgeable) id.
+$folders_token                   = Helper::sign_folders( $attributes['folders'] );
+$json_attributes['foldersToken'] = $folders_token;
 ?>
-<div id="cf-app" class="cf-app" data-json="<?php echo esc_attr( wp_json_encode( $attributes ) ); ?>" data-columns="<?php echo esc_attr( wp_json_encode( $columns ) ); ?>">
+<div id="cf-app" class="cf-app" data-json="<?php echo esc_attr( wp_json_encode( $json_attributes ) ); ?>" data-columns="<?php echo esc_attr( wp_json_encode( $columns ) ); ?>">
 	<div class="cf-main">
 		<div class="cf-container">
 			<?php if ( $is_display_icon || $is_display_title ) : ?>

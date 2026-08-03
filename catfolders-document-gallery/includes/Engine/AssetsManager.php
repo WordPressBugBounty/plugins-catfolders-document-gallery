@@ -16,18 +16,25 @@ class AssetsManager {
 	private $assets = array();
 
 	private function __construct() {
-		add_action( 'init', array( $this, 'register_all_assets' ) );
+		// Before register_block_type(), which references the catf-dg-frontend handles.
+		add_action( 'init', array( $this, 'register_all_assets' ), 5 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_enqueue_scripts' ) );
 	}
 
 	/**
 	 * Register all plugin assets
+	 *
+	 * Frontend enqueueing is left to the block (viewScript/viewStyle) and the shortcode.
 	 */
 	public function register_all_assets() {
 		$this->define_assets();
 		$this->register_styles();
 		$this->register_scripts();
+
+		wp_set_script_translations( 'catf-dg-frontend', 'catfolders-document-gallery', CATF_DG_DIR . '/languages/' );
+
+		// Printed only if the handle gets enqueued.
+		Helper::register_localize_script();
 	}
 
 	/**
@@ -43,7 +50,7 @@ class AssetsManager {
 				),
 				'catf-dg-frontend' => array(
 					'src'  => CATF_DG_URL . 'assets/css/styles.min.css',
-					'deps' => array(),
+					'deps' => array( 'catf-dg-datatables', 'catf-dg-datatables-responsive' ),
 					'ver'  => CATF_DG_VERSION,
 				),
 				'catf-dg-datatables-responsive' => array(
@@ -96,7 +103,13 @@ class AssetsManager {
 				),
 				'catf-dg-frontend' => array(
 					'src'       => CATF_DG_URL . 'build/view.js',
-					'deps'      => array( 'wp-i18n' ),
+					'deps'      => array(
+						'wp-i18n',
+						'catf-dg-datatables',
+						'catf-dg-datatables-natural',
+						'catf-dg-datatables-filesize',
+						'catf-dg-datatables-responsive',
+					),
 					'ver'       => CATF_DG_VERSION,
 					'in_footer' => true,
 				),
@@ -134,28 +147,24 @@ class AssetsManager {
 	}
 
 	/**
-	 * Enqueue frontend assets (for blocks and shortcodes)
+	 * Enqueue frontend assets (for shortcodes and the admin preview)
+	 *
+	 * catf-dg-frontend depends on the DataTables handles, so it pulls in the whole bundle.
+	 *
+	 * @param bool $include_frontend_script Whether the gallery view script is needed.
 	 */
 	public function enqueue_frontend_assets( $include_frontend_script = false ) {
-		// DataTables scripts
-		wp_enqueue_script( 'catf-dg-datatables' );
-		wp_enqueue_script( 'catf-dg-datatables-natural' );
-		wp_enqueue_script( 'catf-dg-datatables-filesize' );
-		wp_enqueue_script( 'catf-dg-datatables-responsive' );
-
-		// Frontend script for shortcodes
 		if ( $include_frontend_script ) {
 			wp_enqueue_script( 'catf-dg-frontend' );
-			wp_set_script_translations( 'catf-dg-frontend', 'catfolders-document-gallery', CATF_DG_DIR . '/languages/' );
+		} else {
+			// Admin preview renders the table with its own app.
+			wp_enqueue_script( 'catf-dg-datatables' );
+			wp_enqueue_script( 'catf-dg-datatables-natural' );
+			wp_enqueue_script( 'catf-dg-datatables-filesize' );
+			wp_enqueue_script( 'catf-dg-datatables-responsive' );
 		}
 
-		// DataTables styles
-		wp_enqueue_style( 'catf-dg-datatables' );
 		wp_enqueue_style( 'catf-dg-frontend' );
-		wp_enqueue_style( 'catf-dg-datatables-responsive' );
-
-		// Register localize script after enqueuing catf-dg-datatables
-		$this->register_localize_script();
 	}
 
 	/**
@@ -192,23 +201,4 @@ class AssetsManager {
 		}
 	}
 
-	/**
-	 * Frontend enqueue scripts
-	 */
-	public function frontend_enqueue_scripts() {
-		$this->enqueue_frontend_assets( true );
-	}
-
-	/**
-	 * Register localize script for catf-dg-datatables
-	 * This should be called after catf-dg-datatables is enqueued
-	 */
-	private function register_localize_script() {
-		// Only register if catf-dg-datatables is enqueued
-		if ( ! wp_script_is( 'catf-dg-datatables', 'enqueued' ) ) {
-			return;
-		}
-
-		Helper::register_localize_script();
-	}
 }

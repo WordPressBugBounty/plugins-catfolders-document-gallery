@@ -37,7 +37,7 @@ class RestAPI {
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'get_attachments_folders' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( $this, 'resPermissionsCheck' ),
 				),
 			)
 		);
@@ -49,7 +49,7 @@ class RestAPI {
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'get_folder_shortcode_data' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( $this, 'resPermissionsCheck' ),
 				),
 			)
 		);
@@ -91,6 +91,47 @@ class RestAPI {
 
 	public function resPermissionsCheck() {
 		return current_user_can( 'upload_files' );
+	}
+
+	/**
+	 * Authorize a set of requested folders against a signed scope token.
+	 *
+	 * The token is minted server-side when the gallery is rendered and carries
+	 * the folders that instance is actually allowed to browse. Every requested
+	 * folder must be one of those roots or a descendant of one; anything else is
+	 * a request for a folder that was never published here.
+	 *
+	 * @param string $token         Signed token from Helper::sign_folders().
+	 * @param int[]  $requested_ids Decrypted folder ids from the request.
+	 * @return bool
+	 */
+	private function scope_allows( $token, $requested_ids ) {
+		$roots = Helper::verify_folders( $token );
+
+		if ( false === $roots || empty( $roots ) ) {
+			return false;
+		}
+
+		foreach ( (array) $requested_ids as $id ) {
+			if ( ! Helper::folder_within_roots( $id, $roots ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Shared 403 for folders that are disabled for frontend use.
+	 */
+	private function folder_not_allowed_response() {
+		return new \WP_REST_Response(
+			array(
+				'success' => false,
+				'data'    => array( 'message' => __( 'This folder is not available.', 'catfolders-document-gallery' ) ),
+			),
+			403
+		);
 	}
 
 	public function get_all_tree_folders( \WP_REST_Request $request ) {
@@ -156,7 +197,35 @@ class RestAPI {
 		try {
 			$params = $request->get_params();
 			$attributes = $params['attr'];
-			$limit_parent_id = $attributes['limit_parent_id'];
+
+			// folders and limit_parent_id arrive encrypted from the client; decrypt
+			// them back to ids. NOTE: this encryption is transport only, not an access
+			// control — the CBC scheme is malleable, so a decrypted id is never trusted
+			// on its own. Authorization happens below via the signed scope token.
+			$attributes['folders'] = array_map(
+				function ( $folder ) {
+					return (int) Helper::decrypt( $folder );
+				},
+				(array) ( $attributes['folders'] ?? array() )
+			);
+			$limit_parent_id = isset( $attributes['limit_parent_id'] ) ? (int) Helper::decrypt( $attributes['limit_parent_id'] ) : 0;
+			$attributes['limit_parent_id'] = $limit_parent_id;
+
+			// Authorize the requested folder against the signed scope of the gallery
+			// that was rendered. This is the real access check: a forged/incremented
+			// id (encrypted or not) is rejected unless it belongs to a folder this
+			// gallery actually published.
+			$folders_token = isset( $attributes['foldersToken'] ) ? $attributes['foldersToken'] : '';
+			if ( ! $this->scope_allows( $folders_token, $attributes['folders'] ) ) {
+				return $this->folder_not_allowed_response();
+			}
+
+			// Folders the admin turned off in Document Gallery > Settings must never be
+			// served from the frontend, even with a valid encrypted id.
+			if ( ! Settings::are_folders_allowed( $attributes['folders'] ) ) {
+				return $this->folder_not_allowed_response();
+			}
+
 			$data    = Helper::get_attachments( $attributes );
 			$data['tableHtml'] = Helper::render_table_html( $attributes );
 
@@ -192,8 +261,25 @@ class RestAPI {
 			$searchValue = $params['searchValue'] ?? '';
 			$catfDataJson = $params['catfDataJson'] ?? array();
 
+			//currentFolders is encrypted on the client, decrypt it back to an array
+			$currentFolders = $params['currentFolders'] ?? '';
+			$decryptedFolders = $currentFolders ? json_decode( Helper::decrypt( $currentFolders ), true ) : array();
+			if ( ! is_array( $decryptedFolders ) ) {
+				$decryptedFolders = array();
+			}
+
+			// Authorize against the gallery's signed scope, then the admin blocklist.
+			$folders_token = isset( $catfDataJson['foldersToken'] ) ? $catfDataJson['foldersToken'] : '';
+			if ( ! $this->scope_allows( $folders_token, $decryptedFolders ) ) {
+				return $this->folder_not_allowed_response();
+			}
+
+			if ( ! Settings::are_folders_allowed( $decryptedFolders ) ) {
+				return $this->folder_not_allowed_response();
+			}
+
 			//update folders to catfDataJson
-			$catfDataJson['folders'] = $params['currentFolders'] ?? array();
+			$catfDataJson['folders'] = $decryptedFolders;
 			$folders = $catfDataJson['folders'] ?? array();
 			$displayColumns = $catfDataJson['displayColumns'] ?? array();
 			if( empty($folders) || empty($displayColumns) ) {

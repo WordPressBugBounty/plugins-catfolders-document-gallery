@@ -62,6 +62,15 @@ class Helper {
 	}
 
 	public static function get_attachments( $args, $get_children_folders = false ) {
+		$args = wp_parse_args(
+			$args,
+			array(
+				'folders'        => array(),
+				'displayColumns' => array(),
+				'searchValue'    => '',
+				'currentPage'    => 1,
+			)
+		);
 		$selectedFolders = isset( $args['folders'] ) ? array_map( 'intval', $args['folders'] ) : array();
 		$columns         = self::generate_columns( $args['displayColumns'] );
 
@@ -164,6 +173,38 @@ class Helper {
 			$files[] = $file;
 		}
 
+		/**
+		 * Filter the files array before rendering.
+		 *
+		 * Each item in $files contains: document_id, title, type, size, url, link,
+		 * alt, modified, updated, image, counter.
+		 *
+		 * Example — sort by the physical file's date (filemtime) instead of the
+		 * WordPress upload date. Useful when files were copied to the server while
+		 * preserving their original timestamps:
+		 *
+		 *     add_filter( 'catf_dg_files', function ( $files ) {
+		 *         foreach ( $files as &$file ) {
+		 *             $path = get_attached_file( $file['document_id'] );
+		 *             // file_exists() guards against files that are missing or offloaded (e.g. S3).
+		 *             $file['_mtime'] = ( $path && file_exists( $path ) ) ? filemtime( $path ) : 0;
+		 *         }
+		 *         unset( $file );
+		 *
+		 *         // Oldest first (ascending). For newest first, swap $a <=> $b to $b <=> $a
+		 *         usort( $files, fn( $a, $b ) => $a['_mtime'] <=> $b['_mtime'] );
+		 *
+		 *         return $files;
+		 *     }, 10, 1 );
+		 *
+		 * Note: filemtime() reads from disk once per file, so sorting a large set of
+		 * files adds overhead. Files must be stored locally on the server.
+		 *
+		 * @param array $files     The files to display.
+		 * @param array $queryArgs The WP_Query args used to fetch the attachments.
+		 * @param array $args      The original arguments passed to get_attachments().
+		 */
+		$files = apply_filters( 'catf_dg_files', $files, $queryArgs, $args );
 		return array(
 			'files'       => $files,
 			'foundPosts'  => $query->found_posts,
@@ -256,7 +297,7 @@ class Helper {
 		$columns = array_filter(
 			$columns,
 			function( $column ) use ( $displayColumns ) {
-				return $displayColumns[ $column['key'] ] === true || $displayColumns[ $column['key'] ] === 'true';
+				return isset( $displayColumns[ $column['key'] ] ) && ( $displayColumns[ $column['key'] ] === true || $displayColumns[ $column['key'] ] === 'true' );
 			}
 		);
 
@@ -280,61 +321,11 @@ class Helper {
 		ob_start();
 
 		foreach ( $columns as $column ) {
-			$column = apply_filters( 'catf_dg_columns_html', $column, $file, $attributes );
-			if ( 'image' === $column['key'] ) {
-				?>
-					<td>
-						<?php echo self::render_column_content($file, $column, $attributes); ?>
-					</td>
-				<?php
-			}
-
-			if ( 'title' === $column['key'] ) {
-				?>
-					<td class="sorting_1 dtr-control">
-					<?php echo self::render_column_content($file, $column, $attributes); ?>
-					</td> 
-				<?php
-			}
-
-			if ( 'type' === $column['key'] ) {
-				?>
-					<td>
-					<?php echo self::render_column_content($file, $column, $attributes); ?>
-					</td>
-				<?php
-			}
-
-			if ( 'size' === $column['key'] ) {
-				?>
-					<td>
-					<?php echo self::render_column_content($file, $column, $attributes); ?>
-					</td>
-				<?php
-			}
-
-			if ( 'updated' === $column['key'] ) {
-				?>
-					<td>
-					<?php echo self::render_column_content($file, $column, $attributes); ?>
-					</td>
-				<?php
-			}
-
-			if ('counter' === $column['key']) {
-				?>
-					<td>
-					<?php echo self::render_column_content($file, $column, $attributes); ?>
-					</td>
-				<?php
-			}
-
-			if ( 'link' === $column['key'] ) {
-				?>
-					<td>
-					<?php echo self::render_column_content($file, $column, $attributes); ?>
-					</td>
-				<?php
+			$column  = apply_filters( 'catf_dg_columns_html', $column, $file, $attributes );
+			$content = self::render_column_content( $file, $column, $attributes );
+			if ( $content ) {
+				$td_class = 'title' === $column['key'] ? ' class="sorting_1 dtr-control"' : '';
+				echo '<td' . $td_class . '>' . $content . '</td>';
 			}
 		}
 
@@ -377,6 +368,8 @@ class Helper {
 			</div>
 			<?php
 			return ob_get_clean();
+		} else {
+			return apply_filters( 'catf_dg_render_custom_column', '', $column, $file, $attributes );
 		}
 	}
 	public static function generate_column_download_btn($file, $column = array(), $attributes = array()) {
@@ -393,7 +386,7 @@ class Helper {
 			$actionIcon = $actionIconSvg;
 		}
 		?>
-		<a data-action="<?php echo esc_attr( $attributes['actionLink'] ); ?>" <?php echo self::get_file_link( $attributes, $attributes['actionLink'], $file['link'] ); ?> class="btn-download" <?php echo $attributes['actionLink'] === 'download' ? 'data-document-id="' . esc_attr($file['document_id']) . '"' : ''; ?> >
+		<a data-action="<?php echo esc_attr( $attributes['actionLink'] ); ?>" <?php echo self::get_file_link( $attributes, $attributes['actionLink'], $file['link'] ); ?> class="btn-download" <?php echo $attributes['actionLink'] === 'download' ? 'data-document-id="' . esc_attr( self::encrypt( $file['document_id'] ) ) . '"' : ''; ?> >
 			<?php echo $actionIcon; ?>
 			<?php echo $attributes['actionLabel'] ?? esc_html__( 'Download', 'catfolders-document-gallery' ); ?>
 		</a>
@@ -409,9 +402,9 @@ class Helper {
 			$data = array();
 		}
 
-		$thumbnail_instance = Thumbnail::get_instance();
+		// $thumbnail_instance = Thumbnail::get_instance();
 
-		$verify_imagick = $thumbnail_instance->verify_imagick();
+		// $verify_imagick = $thumbnail_instance->verify_imagick();
 
 		$default_data = self::get_defaults_attribute();
 
@@ -432,11 +425,12 @@ class Helper {
 		$attrs['popupHeight'] = (int) $attrs['popupHeight'];
 		$attrs['limit']       = (int) $attrs['limit'];
 
-		if ( ! $verify_imagick['status'] ) {
-			$attrs['displayColumns']['image'] = false;
-		} else {
-			$attrs['displayColumns']['image'] = rest_sanitize_boolean( $attrs['displayColumns']['image'] );
-		}
+		// if ( ! $verify_imagick['status'] ) {
+		// 	$attrs['displayColumns']['image'] = false;
+		// } else {
+		// 	$attrs['displayColumns']['image'] = rest_sanitize_boolean( $attrs['displayColumns']['image'] );
+		// }
+		$attrs['displayColumns']['image'] = rest_sanitize_boolean( $attrs['displayColumns']['image'] );
 
 		// Auto-convert actionIconId to actionIconUrl if needed
 		$attrs = self::process_action_icon_attributes( $attrs );
@@ -487,7 +481,7 @@ class Helper {
 	public static function update_download_count($args){
 		$message = "Failed to update download count";
 
-		$post_id = isset($args['id_document']) ? (int) sanitize_text_field($args['id_document']) : false;
+		$post_id = isset($args['id_document']) ? (int) self::decrypt( sanitize_text_field($args['id_document']) ) : false;
 
 		if (!$post_id) {
 			return $message;
@@ -520,12 +514,60 @@ class Helper {
 			$args
 		);
 	}
+
+	/**
+	 * Renders the HTML table for a given set of attributes.
+	 *
+	 * Custom columns can be added via filters. Use 'catf_dg_table_columns' to register
+	 * the column definition and 'catf_dg_render_custom_column' to render its content.
+	 *
+	 * Supported column options:
+	 *   - key        (string)  Column identifier.
+	 *   - label      (string)  Column header text.
+	 *   - type       (string)  Set 'date-sort' to enable date-aware sorting.
+	 *   - orderable  (bool)    Set false to disable sorting. Default true.
+	 *
+	 * @example
+	 * // Add an "Uploaded At" column before the "Updated" column.
+	 *
+	 * add_filter( 'catf_dg_table_columns', function( $columns, $attributes ) {
+	 *     $columns   = array_values( $columns );
+	 *     $insert_at = array_search( 'updated', array_column( $columns, 'key' ) );
+	 *
+	 *     $new_column = array(
+	 *         'label' => __( 'Uploaded At', 'catfolders-document-gallery' ),
+	 *         'key'   => 'uploaded_at',
+	 *         'type'  => 'date-sort',
+	 *     );
+	 *
+	 *     if ( $insert_at !== false ) {
+	 *         array_splice( $columns, $insert_at, 0, array( $new_column ) );
+	 *     } else {
+	 *         $columns[] = $new_column;
+	 *     }
+	 *
+	 *     return $columns;
+	 * }, 10, 2 );
+	 *
+	 * add_filter( 'catf_dg_render_custom_column', function( $html, $column, $file, $attributes ) {
+	 *     if ( $column['key'] !== 'uploaded_at' ) {
+	 *         return $html;
+	 *     }
+	 *
+	 *     $post        = get_post( $file['document_id'] );
+	 *     $uploaded_at = $post ? wp_date( 'M d, Y H:i', strtotime( $post->post_date ) ) : '';
+	 *
+	 *     return '<div class="cf-column-uploaded-at">' . esc_html( $uploaded_at ) . '</div>';
+	 * }, 10, 4 );
+	 */
 	public static function render_table_html($attributes) {
 		$columns = self::generate_columns( $attributes['displayColumns'] );
-		$data = self::get_attachments( $attributes );
+		$columns = apply_filters( 'catf_dg_table_columns', $columns, $attributes );
+		$get_files_of_children = apply_filters( 'catf_get_files_of_children', false );
+		$data = self::get_attachments( $attributes, $get_files_of_children );
 		ob_start();
 		?>
-		<table data-folders="<?php echo esc_attr( wp_json_encode( $attributes['folders'] ) ); ?>" class="cf-table <?php echo ( count( $data['files'] ) == 0 ) ? 'cf-empty-data' : ''; ?>" style="--grid-column:<?php echo esc_attr( $attributes['gridColumn'] ); ?>">
+		<table data-folders="<?php echo esc_attr( self::encrypt( wp_json_encode( $attributes['folders'] ) ) ); ?>" class="cf-table <?php echo ( count( $data['files'] ) == 0 ) ? 'cf-empty-data' : ''; ?>" style="--grid-column:<?php echo esc_attr( $attributes['gridColumn'] ); ?>">
 				<thead>
 					<tr>
 						<?php foreach ( $columns as $column ) { ?>
@@ -543,5 +585,144 @@ class Helper {
 			</table>
 		<?php
 		return ob_get_clean();
+	}
+	public static function encrypt($data) {
+		$key = (defined('AUTH_KEY')) ? AUTH_KEY : 'catfolders_dg_key';
+		$method = 'aes-256-cbc';
+		$ivlen = openssl_cipher_iv_length($method);
+		$iv = openssl_random_pseudo_bytes($ivlen);
+		$encrypted = openssl_encrypt($data, $method, $key, 0, $iv);
+		return base64_encode($iv . $encrypted);
+	}
+
+	public static function decrypt($encrypted_data) {
+		$key = (defined('AUTH_KEY')) ? AUTH_KEY : 'catfolders_dg_key';
+		$method = 'aes-256-cbc';
+		$ivlen = openssl_cipher_iv_length($method);
+		$data = base64_decode($encrypted_data);
+		$iv = substr($data, 0, $ivlen);
+		$encrypted = substr($data, $ivlen);
+		return openssl_decrypt($encrypted, $method, $key, 0, $iv);
+	}
+
+	/**
+	 * Secret used to sign the folder-scope token. Same source as encrypt(), but
+	 * the two must never be confused: encrypt() hides a value, sign_folders()
+	 * authorizes one.
+	 */
+	private static function signing_key() {
+		return defined( 'AUTH_KEY' ) ? AUTH_KEY : 'catfolders_dg_key';
+	}
+
+	/**
+	 * Sign the set of root folder ids a gallery instance is allowed to browse.
+	 *
+	 * Generated server-side at render time (Views/Table.php), where the real
+	 * folder attributes are known and trusted. The frontend echoes the token
+	 * back on every AJAX call so the endpoints can authorize the request against
+	 * what was actually published, instead of trusting a client-supplied id.
+	 *
+	 * HMAC (not the CBC encrypt() scheme) so the payload cannot be tampered with:
+	 * flipping bytes invalidates the signature.
+	 *
+	 * @param int[] $folder_ids Root folder ids for this gallery instance.
+	 * @return string Signed token: base64(json ids) . "." . hmac.
+	 */
+	public static function sign_folders( $folder_ids ) {
+		$ids = array_values( array_unique( array_map( 'intval', (array) $folder_ids ) ) );
+		sort( $ids );
+
+		$payload = wp_json_encode( $ids );
+		$sig     = hash_hmac( 'sha256', $payload, self::signing_key() );
+
+		return base64_encode( $payload ) . '.' . $sig;
+	}
+
+	/**
+	 * Verify a folder-scope token and return the signed root ids.
+	 *
+	 * @param string $token Token produced by sign_folders().
+	 * @return int[]|false Root folder ids, or false when missing/tampered.
+	 */
+	public static function verify_folders( $token ) {
+		if ( ! is_string( $token ) || false === strpos( $token, '.' ) ) {
+			return false;
+		}
+
+		list( $encoded, $sig ) = explode( '.', $token, 2 );
+
+		$payload = base64_decode( $encoded, true );
+		if ( false === $payload ) {
+			return false;
+		}
+
+		$expected = hash_hmac( 'sha256', $payload, self::signing_key() );
+		if ( ! hash_equals( $expected, (string) $sig ) ) {
+			return false;
+		}
+
+		$ids = json_decode( $payload, true );
+		if ( ! is_array( $ids ) ) {
+			return false;
+		}
+
+		return array_map( 'intval', $ids );
+	}
+
+	/**
+	 * id => parent map for every folder, cached per request.
+	 *
+	 * @return array<int,int>
+	 */
+	private static function folder_parent_map() {
+		static $map = null;
+
+		if ( null !== $map ) {
+			return $map;
+		}
+
+		global $wpdb;
+
+		$map  = array();
+		$rows = $wpdb->get_results( "SELECT id, parent FROM {$wpdb->prefix}catfolders" ); // phpcs:ignore WordPress.DB
+		foreach ( (array) $rows as $row ) {
+			$map[ (int) $row->id ] = (int) $row->parent;
+		}
+
+		return $map;
+	}
+
+	/**
+	 * Is $folder_id one of $root_ids, or a descendant of one of them?
+	 *
+	 * Walks the parent chain up to the root. This is the authorization boundary:
+	 * a gallery that publishes root folder A legitimately exposes every folder
+	 * under A (hierarchical navigation), and nothing outside it.
+	 *
+	 * @param int   $folder_id Requested folder.
+	 * @param int[] $root_ids  Signed root folders for the gallery.
+	 * @return bool
+	 */
+	public static function folder_within_roots( $folder_id, $root_ids ) {
+		$folder_id = (int) $folder_id;
+		$root_ids  = array_map( 'intval', (array) $root_ids );
+
+		if ( $folder_id <= 0 || empty( $root_ids ) ) {
+			return false;
+		}
+
+		$map  = self::folder_parent_map();
+		$seen = array();
+
+		while ( $folder_id > 0 && ! isset( $seen[ $folder_id ] ) ) {
+			if ( in_array( $folder_id, $root_ids, true ) ) {
+				return true;
+			}
+
+			$seen[ $folder_id ] = true;
+			$folder_id          = isset( $map[ $folder_id ] ) ? $map[ $folder_id ] : 0;
+		}
+
+		return false;
 	}
 }
