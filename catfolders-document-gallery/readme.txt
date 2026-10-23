@@ -3,7 +3,7 @@ Contributors: catfolders
 Donate link: https://wpmediafolders.com/ 
 Tags: documents, pdf, downloads, document library, document management
 Requires at least: 6.1
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.2
 Stable tag: 2.0.7
 License: GPL-3.0
